@@ -3,4 +3,8 @@
     <string name="todo">TODO</string>
     <string name="nombre_apellidoDefecto">Nombre Apellido</string>
     <string name="telDefecto">000-000-000</string>
+    <string name="buscar">Buscar</string>
+    <string name="title_item">+</string>
+    <string name="switch_nameitem">Switch</string>
+    <string name="compartir">Compartir</string>
 </resources>
