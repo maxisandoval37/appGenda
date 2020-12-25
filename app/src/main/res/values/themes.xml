@@ -12,5 +12,16 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+
+        <!--            CHANGE COLOR SWITCH            -->
+        <!-- active thumb & track color (30% transparency) -->
+        <item name="colorControlActivated">@color/teal_200</item>
+
+        <!-- inactive thumb color -->
+        <item name="colorSwitchThumbNormal">@color/white</item>
+
+        <!-- inactive track color (30% transparency) -->
+        <item name="android:colorForeground">@color/switch_foreground</item>
     </style>
+
 </resources>
