@@ -1,18 +1,20 @@
 package com.mxdigitalacademy.appgenda
 
-class ObjContacto(imgAvatar: Int, nombre: String, apellido: String, telefono: String, email: String) {
+class ObjContacto(imgAvatar: Int, nombre: String, apellido: String, telefonoP: String, telefonoS: String, email: String) {
 
     private var _imgAvatar: Int = 0
     private var _nombre: String = ""
     private var _apellido: String = ""
-    private var _telefono: String = ""
-    private var _email:String = ""
+    private var _telefonoPrincipal: String = ""
+    private var _telefonoSecundario: String = ""
+    private var _email: String = ""
 
     init {
         this._imgAvatar = imgAvatar
         this._nombre = nombre
         this._apellido = apellido
-        this._telefono = telefono
+        this._telefonoPrincipal = telefonoP
+        this._telefonoSecundario = telefonoS
         this._email = email
     }
     fun getNombre(): String {
@@ -26,8 +28,12 @@ class ObjContacto(imgAvatar: Int, nombre: String, apellido: String, telefono: St
         return this._nombre + " " + this._apellido
     }
 
-    fun getTelefono(): String {
-        return  this._telefono
+    fun getTelefonoPrincipal(): String {
+        return  this._telefonoPrincipal
+    }
+
+    fun getTelefonoSecundario(): String {
+        return  this._telefonoSecundario
     }
 
     fun getImgAvatar(): Int {

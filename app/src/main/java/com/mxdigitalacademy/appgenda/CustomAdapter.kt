@@ -31,7 +31,7 @@ class CustomAdapter(var context: Context, items:ArrayList<ObjContacto>): BaseAda
         val item = getItem(p0) as ObjContacto
         holder?.imagen?.setImageResource(item.getImgAvatar())
         holder?.nombreCompleto?.text = item.getNombreCompleto()
-        holder?.telefono?.text = item.getTelefono()
+        holder?.telefono?.text = item.getTelefonoPrincipal()
 
         return vista!!
     }

@@ -7,4 +7,5 @@
     <string name="title_item">+</string>
     <string name="switch_nameitem">Switch</string>
     <string name="compartir">Compartir</string>
+    <string name="emailDefecto">admin123@email.com</string>
 </resources>
