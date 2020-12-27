@@ -22,7 +22,8 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
             R.id.addContact -> {
-
+                val intent = Intent(this,NewContact::class.java)
+                startActivity(intent)
                 return true
             }
         }
