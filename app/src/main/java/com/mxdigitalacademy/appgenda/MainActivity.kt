@@ -15,13 +15,23 @@ class MainActivity : AppCompatActivity() {
     private var listaObjContactos: ArrayList<ObjContacto> = ArrayList()
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {//nos permite asociar elems a nuestra interfaz
-        menuInflater.inflate(R.menu.menu_contactos,menu)//agregamos la toolbar al MainActivity
+        menuInflater.inflate(R.menu.menu_toolbar,menu)//agregamos la toolbar al MainActivity
         return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            R.id.addContact -> {
+
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun iniciarToolbar(){
         toolbar = findViewById(R.id.toolbar)
-        toolbar?.title = ""
+        toolbar?.setTitle(R.string.app_name)
         setSupportActionBar(toolbar)
     }
 
@@ -34,6 +44,9 @@ class MainActivity : AppCompatActivity() {
 
         listaVisual.onItemClickListener = AdapterView.OnItemClickListener { _, _, i, _ ->
             Toast.makeText(this, listaObjContactos[i].getNombreCompleto(), Toast.LENGTH_SHORT).show()
+            //setear valores en el info_contacto
+            val intent = Intent(this,InfoContacto::class.java)
+            startActivity(intent)
         }
     }
 
