@@ -46,11 +46,21 @@ class NewContact : AppCompatActivity() {
         }
     }
 
+    private fun accionBotonCancelar(){
+        val boton = findViewById<Button>(R.id.btnCancelar)
+
+        boton.setOnClickListener {
+            Toast.makeText(this,"Acción cancelada",Toast.LENGTH_SHORT).show()
+            finish()
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_contact)
 
         iniciarToolbar()
         accionBotonGuardar()
+        accionBotonCancelar()
     }
 }
