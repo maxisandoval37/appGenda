@@ -6,13 +6,17 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.AdapterView
+import android.widget.EditText
 import android.widget.ListView
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 
 class MainActivity : AppCompatActivity() {
     private var toolbar: Toolbar? = null
-    private var listaObjContactos: ArrayList<ObjContacto> = ArrayList()
+
+    companion object{
+        var listaObjContactos: ArrayList<ObjContacto> = ArrayList()
+    }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {//nos permite asociar elems a nuestra interfaz
         menuInflater.inflate(R.menu.menu_toolbar,menu)
@@ -22,8 +26,10 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
             R.id.addContact -> {
+
                 val intent = Intent(this,NewContact::class.java)
                 startActivity(intent)
+
                 return true
             }
         }

@@ -13,4 +13,6 @@
     <string name="tel_fono_principal">Teléfono Principal</string>
     <string name="tel_fono_secundario">Teléfono Secundario</string>
     <string name="e_mail">E-mail</string>
+    <string name="bt_cancelar">Cancelar</string>
+    <string name="bt_guardar">Guardar</string>
 </resources>
