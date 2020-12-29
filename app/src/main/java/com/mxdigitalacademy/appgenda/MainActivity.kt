@@ -13,6 +13,8 @@ import androidx.appcompat.widget.Toolbar
 
 class MainActivity : AppCompatActivity() {
     private var toolbar: Toolbar? = null
+    private var listaVisual: ListView? = null
+    private var adaptador: CustomAdapter? = null
 
     companion object{
         var listaObjContactos: ArrayList<ObjContacto> = ArrayList()
@@ -44,14 +46,14 @@ class MainActivity : AppCompatActivity() {
 
     private fun listView(){
         listViewElements()
-        val listaVisual = findViewById<ListView>(R.id.listaContactos)
+        listaVisual = findViewById<ListView>(R.id.listaContactos)
 
-        val adaptador = CustomAdapter(this,listaObjContactos)
-        listaVisual.adapter = adaptador
+        adaptador = CustomAdapter(this,listaObjContactos)
+        listaVisual?.adapter = adaptador
 
-        listaVisual.onItemClickListener = AdapterView.OnItemClickListener { _, _, i, _ ->
+        listaVisual?.onItemClickListener = AdapterView.OnItemClickListener { _, _, i, _ ->
             Toast.makeText(this, listaObjContactos[i].getNombreCompleto(), Toast.LENGTH_SHORT).show()
-            //setear valores en el info_contacto
+
             val intent = Intent(this,InfoContacto::class.java)
             startActivity(intent)
         }
@@ -69,5 +71,10 @@ class MainActivity : AppCompatActivity() {
 
         iniciarToolbar()
         listView()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        adaptador?.notifyDataSetChanged()
     }
 }
