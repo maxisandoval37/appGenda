@@ -53,7 +53,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:inputType="phone"
         android:hint="@string/tel_fono_principal"
         android:autofillHints="@string/tel_fono_principal"
         app:layout_constraintEnd_toEndOf="parent"
@@ -69,7 +69,7 @@
         android:ems="10"
         android:hint="@string/tel_fono_secundario"
         android:importantForAutofill="no"
-        android:inputType="textPersonName"
+        android:inputType="phone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
@@ -83,13 +83,12 @@
         android:ems="10"
         android:hint="@string/e_mail"
         android:autofillHints="@string/e_mail"
-        android:inputType="textPersonName"
+        android:inputType="textEmailAddress"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etTelSecundario"
         app:layout_constraintVertical_bias="0.054" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
