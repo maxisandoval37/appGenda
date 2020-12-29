@@ -15,7 +15,7 @@ class MainActivity : AppCompatActivity() {
     private var listaObjContactos: ArrayList<ObjContacto> = ArrayList()
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {//nos permite asociar elems a nuestra interfaz
-        menuInflater.inflate(R.menu.menu_toolbar,menu)//agregamos la toolbar al MainActivity
+        menuInflater.inflate(R.menu.menu_toolbar,menu)
         return super.onCreateOptionsMenu(menu)
     }
 

@@ -24,7 +24,7 @@
         <activity
             android:name=".NewContact"
             android:parentActivityName=".MainActivity" />
-        
+
     </application>
 
 </manifest>

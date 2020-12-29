@@ -8,4 +8,9 @@
     <string name="switch_nameitem">Switch</string>
     <string name="compartir">Compartir</string>
     <string name="emailDefecto">admin123@email.com</string>
+    <string name="nombre">Nombre</string>
+    <string name="apellido">Apellido</string>
+    <string name="tel_fono_principal">Teléfono Principal</string>
+    <string name="tel_fono_secundario">Teléfono Secundario</string>
+    <string name="e_mail">E-mail</string>
 </resources>
