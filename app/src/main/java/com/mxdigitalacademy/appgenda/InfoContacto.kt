@@ -10,6 +10,7 @@ import androidx.appcompat.widget.Toolbar
 
 class InfoContacto : AppCompatActivity() {
     private var toolbar: Toolbar? = null
+    private var indexObjContacto:Int? =null
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_info_contacto,menu)
@@ -28,7 +29,7 @@ class InfoContacto : AppCompatActivity() {
             }
 
             R.id.borrarContacto -> {
-                MainActivity.listaObjContactos.removeAt(0)
+                indexObjContacto?.let { MainActivity.listaObjContactos.removeAt(it) }
                 finish()
                 return true
             }
@@ -55,7 +56,7 @@ class InfoContacto : AppCompatActivity() {
         val tel2 = findViewById<TextView>(R.id.tvTel2)
         val email = findViewById<TextView>(R.id.tvEmail)
 
-        val indexObjContacto = intent.getStringExtra("ID")?.toInt()
+        indexObjContacto = intent.getStringExtra("ID")?.toInt()
         val contactoAux = indexObjContacto?.let { MainActivity.listaObjContactos[it] }
 
         contactoAux?.getImgAvatar()?.let { fotoAvatar.setImageResource(it) }

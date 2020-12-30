@@ -50,8 +50,6 @@ class MainActivity : AppCompatActivity() {
         listaVisual?.adapter = adaptador
 
         listaVisual?.setOnItemClickListener { _, _, i, _ ->
-            Toast.makeText(this, listaObjContactos[i].getNombreCompleto(), Toast.LENGTH_SHORT).show()
-
             val intent = Intent(this,InfoContacto::class.java)
             intent.putExtra("ID",i.toString())
             startActivity(intent)
