@@ -15,4 +15,6 @@
     <string name="e_mail">E-mail</string>
     <string name="bt_cancelar">Cancelar</string>
     <string name="bt_guardar">Guardar</string>
+    <string name="borrar">borrar</string>
+    <string name="editar">editar</string>
 </resources>

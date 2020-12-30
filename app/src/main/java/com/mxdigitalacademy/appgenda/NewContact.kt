@@ -2,6 +2,7 @@ package com.mxdigitalacademy.appgenda
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -10,6 +11,16 @@ import androidx.appcompat.widget.Toolbar
 class NewContact : AppCompatActivity() {
 
     private var toolbar: Toolbar? = null
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            android.R.id.home ->  {
+                finish()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
 
     private fun hablitraBotonVolver(){
         val actionBar = supportActionBar

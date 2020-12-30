@@ -2,12 +2,39 @@ package com.mxdigitalacademy.appgenda
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 
 class InfoContacto : AppCompatActivity() {
     private var toolbar: Toolbar? = null
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_info_contacto,menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            android.R.id.home ->  {
+                finish()
+                return true
+            }
+
+            R.id.editarContacto -> {
+                return true
+            }
+
+            R.id.borrarContacto -> {
+                MainActivity.listaObjContactos.removeAt(0)
+                finish()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
 
     private fun hablitraBotonVolver(){
         val actionBar = supportActionBar
