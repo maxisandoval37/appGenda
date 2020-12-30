@@ -2,6 +2,8 @@ package com.mxdigitalacademy.appgenda
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 
 class InfoContacto : AppCompatActivity() {
@@ -19,10 +21,29 @@ class InfoContacto : AppCompatActivity() {
         hablitraBotonVolver()
     }
 
+    private fun setearInfoElemsVisuales(){
+        val fotoAvatar = findViewById<ImageView>(R.id.ivAvatar)
+        val nombreCompleto = findViewById<TextView>(R.id.tvNombreCompleto)
+        val tel1 = findViewById<TextView>(R.id.tvTel1)
+        val tel2 = findViewById<TextView>(R.id.tvTel2)
+        val email = findViewById<TextView>(R.id.tvEmail)
+
+        val indexObjContacto = intent.getStringExtra("ID")?.toInt()
+        val contactoAux = indexObjContacto?.let { MainActivity.listaObjContactos[it] }
+
+        contactoAux?.getImgAvatar()?.let { fotoAvatar.setImageResource(it) }
+        nombreCompleto.text = contactoAux?.getNombreCompleto()
+        tel1.text = contactoAux?.getTelefonoPrincipal()
+        tel2.text = contactoAux?.getTelefonoSecundario()
+        email.text = contactoAux?.getEmail()
+
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_contacto)
+        setContentView(R.layout.activity_info_contacto)
 
         iniciarToolbar()
+        setearInfoElemsVisuales()
     }
 }
