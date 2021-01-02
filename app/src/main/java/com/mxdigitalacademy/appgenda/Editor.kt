@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Button
 import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 
@@ -44,10 +43,10 @@ class Editor : AppCompatActivity() {
         val emailEditor = findViewById<EditText>(R.id.etEmailEditor)
 
         nombreEditor.setText(MainActivity.listaObjContactos[idContactoActual].getNombre())
-        apellidoEditor.setText(MainActivity.listaObjContactos[idContactoActual].getApellido(),TextView.BufferType.EDITABLE)
-        tel1Editor.setText(MainActivity.listaObjContactos[idContactoActual].getTelefonoPrincipal(),TextView.BufferType.EDITABLE)
-        tel2Editor.setText(MainActivity.listaObjContactos[idContactoActual].getTelefonoSecundario(),TextView.BufferType.EDITABLE)
-        emailEditor.setText(MainActivity.listaObjContactos[idContactoActual].getEmail(),TextView.BufferType.EDITABLE)
+        apellidoEditor.setText(MainActivity.listaObjContactos[idContactoActual].getApellido())
+        tel1Editor.setText(MainActivity.listaObjContactos[idContactoActual].getTelefonoPrincipal())
+        tel2Editor.setText(MainActivity.listaObjContactos[idContactoActual].getTelefonoSecundario())
+        emailEditor.setText(MainActivity.listaObjContactos[idContactoActual].getEmail())
     }
 
     fun lanzarMensaje(mensaje: String){
