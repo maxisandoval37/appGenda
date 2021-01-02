@@ -20,7 +20,7 @@
         app:layout_constraintVertical_bias="0.000"/>
 
     <EditText
-        android:id="@+id/etNombreEditor"
+        android:id="@+id/etNombre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="120dp"
@@ -34,7 +34,7 @@
         app:layout_constraintTop_toTopOf="@+id/toolbar" />
 
     <EditText
-        android:id="@+id/etApellidoEditor"
+        android:id="@+id/etApellido"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
@@ -45,10 +45,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etNombreEditor" />
+        app:layout_constraintTop_toBottomOf="@+id/etNombre" />
 
     <EditText
-        android:id="@+id/etTelPrincipalEditor"
+        android:id="@+id/etTelPrincipal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
@@ -59,10 +59,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etApellidoEditor" />
+        app:layout_constraintTop_toBottomOf="@+id/etApellido" />
 
     <EditText
-        android:id="@+id/etTelSecundarioEditor"
+        android:id="@+id/etTelSecundario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
@@ -73,10 +73,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etTelPrincipalEditor" />
+        app:layout_constraintTop_toBottomOf="@+id/etTelPrincipal" />
 
     <EditText
-        android:id="@+id/etEmailEditor"
+        android:id="@+id/etEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
@@ -88,7 +88,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etTelSecundarioEditor"
+        app:layout_constraintTop_toBottomOf="@+id/etTelSecundario"
         app:layout_constraintVertical_bias="0.054" />
 
     <Button

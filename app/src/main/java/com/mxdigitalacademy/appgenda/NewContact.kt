@@ -38,11 +38,11 @@ class NewContact : AppCompatActivity() {
         val boton = findViewById<Button>(R.id.btnGuardar)
 
         boton.setOnClickListener {
-            val nombre = findViewById<EditText>(R.id.etNombreEditor).text.toString()
-            val apellido = findViewById<EditText>(R.id.etApellidoEditor).text.toString()
-            val tel1 = findViewById<EditText>(R.id.etTelPrincipalEditor).text.toString()
-            var tel2 = findViewById<EditText>(R.id.etTelSecundarioEditor).text.toString()
-            val email = findViewById<EditText>(R.id.etEmailEditor).text.toString()
+            val nombre = findViewById<EditText>(R.id.etNombre).text.toString()
+            val apellido = findViewById<EditText>(R.id.etApellido).text.toString()
+            val tel1 = findViewById<EditText>(R.id.etTelPrincipal).text.toString()
+            var tel2 = findViewById<EditText>(R.id.etTelSecundario).text.toString()
+            val email = findViewById<EditText>(R.id.etEmail).text.toString()
 
             if (nombre.isNotEmpty() && apellido.isNotEmpty() && tel1.isNotEmpty() && email.isNotEmpty()){
                 if (tel2.isEmpty())
@@ -56,7 +56,6 @@ class NewContact : AppCompatActivity() {
             }
             else
                 Toast.makeText(this,"Complete todos los campos para continuar",Toast.LENGTH_SHORT).show()
-
         }
     }
 

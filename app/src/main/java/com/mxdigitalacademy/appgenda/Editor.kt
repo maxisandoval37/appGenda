@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
@@ -51,11 +52,11 @@ class Editor : AppCompatActivity() {
     }
 
     fun guardarCambios(){
-        //similar a accionBotonGuardar
+
     }
 
     private fun accionBotonCancelar(){
-        val boton = findViewById<Button>(R.id.btnCancelar)
+        val boton = findViewById<Button>(R.id.btnCancelarEditor)
 
         boton.setOnClickListener {
             Toast.makeText(this,"Acción cancelada", Toast.LENGTH_SHORT).show()
