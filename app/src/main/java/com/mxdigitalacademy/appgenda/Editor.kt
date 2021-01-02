@@ -2,12 +2,37 @@ package com.mxdigitalacademy.appgenda
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
 import android.widget.Button
-import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.widget.Toolbar
 
 class Editor : AppCompatActivity() {
+
+    private var toolbar: Toolbar? = null
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            android.R.id.home ->  {
+                finish()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun hablitraBotonVolver(){
+        val actionBar = supportActionBar
+        actionBar?.setDisplayHomeAsUpEnabled(true)
+    }
+
+    private fun iniciarToolbar(){
+        toolbar = findViewById(R.id.toolbar)
+        toolbar?.title = ""
+        setSupportActionBar(toolbar)
+        hablitraBotonVolver()
+    }
 
     private fun setearInfoInputsTexts(){
         val nombreEditor = findViewById<TextView>(R.id.etNombreEditor)
@@ -26,7 +51,7 @@ class Editor : AppCompatActivity() {
     }
 
     fun guardarCambios(){
-
+        //similar a accionBotonGuardar
     }
 
     private fun accionBotonCancelar(){
@@ -42,6 +67,7 @@ class Editor : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_editor)
 
+        iniciarToolbar()
         setearInfoInputsTexts()
         guardarCambios()
         accionBotonCancelar()

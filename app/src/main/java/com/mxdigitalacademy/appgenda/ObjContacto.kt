@@ -43,4 +43,6 @@ class ObjContacto(imgAvatar: Int, nombre: String, apellido: String, telefonoP: S
     fun getEmail(): String {
         return this._email
     }
+
+    //agregar seters
 }
