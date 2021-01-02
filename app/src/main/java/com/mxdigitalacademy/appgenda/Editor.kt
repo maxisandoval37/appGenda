@@ -43,22 +43,55 @@ class Editor : AppCompatActivity() {
         val tel2Editor = findViewById<EditText>(R.id.etTelSecundarioEditor)
         val emailEditor = findViewById<EditText>(R.id.etEmailEditor)
 
-        nombreEditor.setText(MainActivity.listaObjContactos[idContactoActual].getNombre(),TextView.BufferType.EDITABLE)
+        nombreEditor.setText(MainActivity.listaObjContactos[idContactoActual].getNombre())
         apellidoEditor.setText(MainActivity.listaObjContactos[idContactoActual].getApellido(),TextView.BufferType.EDITABLE)
         tel1Editor.setText(MainActivity.listaObjContactos[idContactoActual].getTelefonoPrincipal(),TextView.BufferType.EDITABLE)
         tel2Editor.setText(MainActivity.listaObjContactos[idContactoActual].getTelefonoSecundario(),TextView.BufferType.EDITABLE)
         emailEditor.setText(MainActivity.listaObjContactos[idContactoActual].getEmail(),TextView.BufferType.EDITABLE)
     }
 
-    fun guardarCambios(){
+    fun lanzarMensaje(mensaje: String){
+        Toast.makeText(this,mensaje,Toast.LENGTH_SHORT).show()
+    }
 
+    fun actualizarObjetoContacto(nombre: String, apellido: String, tel1: String, tel2: String, email: String){
+        //MainActivity.listaObjContactos[idContactoActual].setImgAvatar(0)
+        MainActivity.listaObjContactos[idContactoActual].setNombre(nombre)
+        MainActivity.listaObjContactos[idContactoActual].setApellido(apellido)
+        MainActivity.listaObjContactos[idContactoActual].setTelPrincipal(tel1)
+        MainActivity.listaObjContactos[idContactoActual].setTelSecundario(tel2)
+        MainActivity.listaObjContactos[idContactoActual].setEmail(email)
+    }
+
+    fun accionBotonGuardar(){
+        val botonGuardar = findViewById<Button>(R.id.btnGuardarEditor)
+
+        botonGuardar.setOnClickListener {
+            val nombre = findViewById<EditText>(R.id.etNombreEditor).text.toString()
+            val apellido = findViewById<EditText>(R.id.etApellidoEditor).text.toString()
+            val tel1 = findViewById<EditText>(R.id.etTelPrincipalEditor).text.toString()
+            var tel2 = findViewById<EditText>(R.id.etTelSecundarioEditor).text.toString()
+            val email = findViewById<EditText>(R.id.etEmailEditor).text.toString()
+
+            if (nombre.isNotEmpty() && apellido.isNotEmpty() && tel1.isNotEmpty() && email.isNotEmpty()){
+                if (tel2.isEmpty())
+                    tel2 = "Sin tel secundario"
+
+                actualizarObjetoContacto(nombre,apellido,tel1,tel2,email)
+
+                lanzarMensaje("Contacto actualizado")
+                finish()
+            }
+            else
+                lanzarMensaje("Complete los campos restantes para continuar")
+        }
     }
 
     private fun accionBotonCancelar(){
         val boton = findViewById<Button>(R.id.btnCancelarEditor)
 
         boton.setOnClickListener {
-            Toast.makeText(this,"Acción cancelada", Toast.LENGTH_SHORT).show()
+            lanzarMensaje("Acción cancelada")
             finish()
         }
     }
@@ -70,7 +103,7 @@ class Editor : AppCompatActivity() {
         idContactoActual= intent.getStringExtra("ID_EDITOR")?.toInt()!!
         iniciarToolbar()
         setearInfoInputsTexts()
-        guardarCambios()
+        accionBotonGuardar()
         accionBotonCancelar()
     }
 }

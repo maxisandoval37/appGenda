@@ -34,6 +34,10 @@ class NewContact : AppCompatActivity() {
         hablitraBotonVolver()
     }
 
+    fun lanzarMensaje(mensaje: String){
+        Toast.makeText(this,mensaje,Toast.LENGTH_SHORT).show()
+    }
+
     private fun accionBotonGuardar(){
         val boton = findViewById<Button>(R.id.btnGuardar)
 
@@ -51,11 +55,11 @@ class NewContact : AppCompatActivity() {
                 val contacto = ObjContacto(R.drawable.ic_launcher_foreground, nombre,apellido, tel1, tel2, email)
 
                 MainActivity.listaObjContactos.add(contacto)
-                Toast.makeText(this,"Contacto guardado",Toast.LENGTH_SHORT).show()
+                lanzarMensaje("Contacto guardado")
                 finish()
             }
             else
-                Toast.makeText(this,"Complete todos los campos para continuar",Toast.LENGTH_SHORT).show()
+                lanzarMensaje("Complete los campos restantes para continuar")
         }
     }
 
@@ -63,7 +67,7 @@ class NewContact : AppCompatActivity() {
         val boton = findViewById<Button>(R.id.btnCancelar)
 
         boton.setOnClickListener {
-            Toast.makeText(this,"Acción cancelada",Toast.LENGTH_SHORT).show()
+            lanzarMensaje("Acción cancelada")
             finish()
         }
     }
