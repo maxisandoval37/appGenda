@@ -12,6 +12,7 @@ import androidx.appcompat.widget.Toolbar
 class Editor : AppCompatActivity() {
 
     private var toolbar: Toolbar? = null
+    private var idContactoActual:Int = 0
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
@@ -36,19 +37,17 @@ class Editor : AppCompatActivity() {
     }
 
     private fun setearInfoInputsTexts(){
-        val nombreEditor = findViewById<TextView>(R.id.etNombreEditor)
-        val apellidoEditor = findViewById<TextView>(R.id.etApellidoEditor)
-        val tel1Editor = findViewById<TextView>(R.id.etTelPrincipalEditor)
-        val tel2Editor = findViewById<TextView>(R.id.etTelSecundarioEditor)
-        val emailEditor = findViewById<TextView>(R.id.etEmailEditor)
+        val nombreEditor = findViewById<EditText>(R.id.etNombreEditor)
+        val apellidoEditor = findViewById<EditText>(R.id.etApellidoEditor)
+        val tel1Editor = findViewById<EditText>(R.id.etTelPrincipalEditor)
+        val tel2Editor = findViewById<EditText>(R.id.etTelSecundarioEditor)
+        val emailEditor = findViewById<EditText>(R.id.etEmailEditor)
 
-        val idContactoActual:Int = intent.getStringExtra("ID_EDITOR")?.toInt() ?: 0
-
-        nombreEditor.text = MainActivity.listaObjContactos[idContactoActual].getNombre()
-        apellidoEditor.text = MainActivity.listaObjContactos[idContactoActual].getApellido()
-        tel1Editor.text = MainActivity.listaObjContactos[idContactoActual].getTelefonoPrincipal()
-        tel2Editor.text = MainActivity.listaObjContactos[idContactoActual].getTelefonoSecundario()
-        emailEditor.text = MainActivity.listaObjContactos[idContactoActual].getEmail()
+        nombreEditor.setText(MainActivity.listaObjContactos[idContactoActual].getNombre(),TextView.BufferType.EDITABLE)
+        apellidoEditor.setText(MainActivity.listaObjContactos[idContactoActual].getApellido(),TextView.BufferType.EDITABLE)
+        tel1Editor.setText(MainActivity.listaObjContactos[idContactoActual].getTelefonoPrincipal(),TextView.BufferType.EDITABLE)
+        tel2Editor.setText(MainActivity.listaObjContactos[idContactoActual].getTelefonoSecundario(),TextView.BufferType.EDITABLE)
+        emailEditor.setText(MainActivity.listaObjContactos[idContactoActual].getEmail(),TextView.BufferType.EDITABLE)
     }
 
     fun guardarCambios(){
@@ -68,6 +67,7 @@ class Editor : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_editor)
 
+        idContactoActual= intent.getStringExtra("ID_EDITOR")?.toInt()!!
         iniciarToolbar()
         setearInfoInputsTexts()
         guardarCambios()

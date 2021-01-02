@@ -30,7 +30,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/toolbar" />
+        app:layout_constraintTop_toTopOf="@+id/toolbar"
+        android:autofillHints="@string/nombre"
+        android:labelFor="@+id/etNombreEditor" />
 
     <EditText
         android:id="@+id/etApellidoEditor"
@@ -43,7 +45,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etNombreEditor" />
+        app:layout_constraintTop_toBottomOf="@+id/etNombreEditor"
+        android:autofillHints="@string/apellido"
+        android:labelFor="@+id/etApellidoEditor"/>
 
     <EditText
         android:id="@+id/etTelPrincipalEditor"
@@ -56,7 +60,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etApellidoEditor" />
+        app:layout_constraintTop_toBottomOf="@+id/etApellidoEditor"
+        android:autofillHints="@string/tel_fono_principal"
+        android:labelFor="@+id/etTelPrincipalEditor"/>
 
     <EditText
         android:id="@+id/etTelSecundarioEditor"
@@ -69,7 +75,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etTelPrincipalEditor" />
+        app:layout_constraintTop_toBottomOf="@+id/etTelPrincipalEditor"
+        android:autofillHints="@string/tel_fono_secundario"
+        android:labelFor="@+id/etTelSecundarioEditor"/>
 
     <EditText
         android:id="@+id/etEmailEditor"
@@ -84,7 +92,9 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etTelSecundarioEditor"
-        app:layout_constraintVertical_bias="0.054" />
+        app:layout_constraintVertical_bias="0.054"
+        android:autofillHints="@string/e_mail"
+        android:labelFor="@+id/etEmailEditor"/>
 
     <Button
         android:id="@+id/btnGuardarEditor"
