@@ -1,5 +1,6 @@
 package com.mxdigitalacademy.appgenda
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -25,6 +26,9 @@ class InfoContacto : AppCompatActivity() {
             }
 
             R.id.editarContacto -> {
+                val intent = Intent(this,Editor::class.java)
+                intent.putExtra("ID_EDITOR",indexObjContacto.toString())
+                startActivity(intent)
                 return true
             }
 
@@ -64,7 +68,6 @@ class InfoContacto : AppCompatActivity() {
         tel1.text = contactoAux?.getTelefonoPrincipal()
         tel2.text = contactoAux?.getTelefonoSecundario()
         email.text = contactoAux?.getEmail()
-
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
