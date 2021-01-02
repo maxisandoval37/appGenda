@@ -44,5 +44,27 @@ class ObjContacto(imgAvatar: Int, nombre: String, apellido: String, telefonoP: S
         return this._email
     }
 
-    //agregar seters
+    fun setImgAvatar(patch: Int){
+        this._imgAvatar = patch
+    }
+
+    fun setNombre(nombre: String){
+        this._nombre = nombre
+    }
+
+    fun setApellido(apellido: String){
+        this._apellido = apellido
+    }
+
+    fun setTelPrincipal(telPrin: String){
+        this._telefonoPrincipal = telPrin
+    }
+
+    fun setTelSecundario(telSecun: String?){
+        this._telefonoSecundario = telSecun
+    }
+
+    fun setEmail(email: String){
+        this._email = email
+    }
 }
