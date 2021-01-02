@@ -77,4 +77,9 @@ class InfoContacto : AppCompatActivity() {
         iniciarToolbar()
         setearInfoElemsVisuales()
     }
+
+    override fun onResume() {
+        super.onResume()
+        setearInfoElemsVisuales()
+    }
 }
