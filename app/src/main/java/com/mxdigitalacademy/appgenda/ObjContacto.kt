@@ -17,6 +17,20 @@ class ObjContacto(imgAvatar: Int, nombre: String, apellido: String, telefonoP: S
         this._telefonoSecundario = telefonoS
         this._email = email
     }
+
+    companion object{
+        fun datosValidos(nombre:String, apellido: String, tel1:String, tel2:String, email:String): Boolean{
+            when{
+                nombre.length >10 -> throw IllegalArgumentException("El Nombre no puede tener más de 10 caracteres")
+                apellido.length >10 -> throw IllegalArgumentException("El Apellido no puede tener más de 10 caracteres")
+                tel1.length >10 -> throw IllegalArgumentException("El 1° Teléfono no puede tener más de 10 digitos")
+                tel2.length >10 -> throw IllegalArgumentException("El 2° Teléfono no puede tener más de 10 digitos")
+                email.length > 15 -> throw IllegalArgumentException("El Email no puede tener más de 15 caracteres")
+            }
+            return true
+        }
+    }
+
     fun getNombre(): String {
         return this._nombre
     }
