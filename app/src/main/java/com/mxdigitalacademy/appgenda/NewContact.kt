@@ -34,8 +34,12 @@ class NewContact : AppCompatActivity() {
         hablitraBotonVolver()
     }
 
-    fun lanzarMensaje(mensaje: String){
+    private fun lanzarMensaje(mensaje: String){
         Toast.makeText(this,mensaje,Toast.LENGTH_SHORT).show()
+    }
+
+    private fun datosValidos(nombre:String, apellido: String, tel1:String, tel2:String, email:String): Boolean{
+        return nombre.length <= 10 && apellido.length <= 10 && tel1.length <= 10 && email.length <= 15 && tel2.length <= 10
     }
 
     private fun accionBotonGuardar(){
@@ -52,11 +56,15 @@ class NewContact : AppCompatActivity() {
                 if (tel2.isEmpty())
                     tel2 = "No posee"
 
-                val contacto = ObjContacto(R.drawable.ic_launcher_foreground, nombre,apellido, tel1, tel2, email)
+                if (datosValidos(nombre,apellido,tel1,tel2,email)){
+                    val contacto = ObjContacto(R.drawable.ic_launcher_foreground, nombre,apellido, tel1, tel2, email)
 
-                MainActivity.listaObjContactos.add(contacto)
-                lanzarMensaje("Contacto guardado")
-                finish()
+                    MainActivity.listaObjContactos.add(contacto)
+                    lanzarMensaje("Contacto guardado")
+                    finish()
+                }
+                else
+                    lanzarMensaje("Un campo supera el limite de caracteres")
             }
             else
                 lanzarMensaje("Complete los campos restantes para continuar")

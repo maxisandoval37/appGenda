@@ -49,11 +49,11 @@ class Editor : AppCompatActivity() {
         emailEditor.setText(MainActivity.listaObjContactos[idContactoActual].getEmail())
     }
 
-    fun lanzarMensaje(mensaje: String){
+    private fun lanzarMensaje(mensaje: String){
         Toast.makeText(this,mensaje,Toast.LENGTH_SHORT).show()
     }
 
-    fun actualizarObjetoContacto(nombre: String, apellido: String, tel1: String, tel2: String, email: String){
+    private fun actualizarObjetoContacto(nombre: String, apellido: String, tel1: String, tel2: String, email: String){
         //MainActivity.listaObjContactos[idContactoActual].setImgAvatar(0)
         MainActivity.listaObjContactos[idContactoActual].setNombre(nombre)
         MainActivity.listaObjContactos[idContactoActual].setApellido(apellido)
@@ -62,7 +62,7 @@ class Editor : AppCompatActivity() {
         MainActivity.listaObjContactos[idContactoActual].setEmail(email)
     }
 
-    fun accionBotonGuardar(){
+    private fun accionBotonGuardar(){
         val botonGuardar = findViewById<Button>(R.id.btnGuardarEditor)
 
         botonGuardar.setOnClickListener {
