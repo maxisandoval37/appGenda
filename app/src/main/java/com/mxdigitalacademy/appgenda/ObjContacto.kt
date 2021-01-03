@@ -49,22 +49,41 @@ class ObjContacto(imgAvatar: Int, nombre: String, apellido: String, telefonoP: S
     }
 
     fun setNombre(nombre: String){
-        this._nombre = nombre
+        if (nombre.length <= 10)
+            this._nombre = nombre
+        else
+            throw IllegalArgumentException("El Nombre no puede tener más de 10 caracteres")
     }
 
     fun setApellido(apellido: String){
-        this._apellido = apellido
+        if (apellido.length <= 10)
+            this._apellido = apellido
+        else
+            throw IllegalArgumentException("El Apellido no puede tener más de 10 caracteres")
     }
 
     fun setTelPrincipal(telPrin: String){
-        this._telefonoPrincipal = telPrin
+        if (telPrin.length <= 10)
+            this._telefonoPrincipal = telPrin
+        else
+            throw IllegalArgumentException("El 1° Teléfono no puede tener más de 10 digitos")
     }
 
     fun setTelSecundario(telSecun: String?){
-        this._telefonoSecundario = telSecun
+        if (!telSecun.isNullOrEmpty()){
+            if (telSecun.toString().length <= 10)
+                this._telefonoSecundario = telSecun
+            else
+                throw IllegalArgumentException("El 2° Teléfono no puede tener más de 10 digitos")
+        }
+        else
+            this._telefonoSecundario = telSecun
     }
 
     fun setEmail(email: String){
-        this._email = email
+        if (email.length <= 15)
+            this._email = email
+        else
+            throw IllegalArgumentException("El Email no puede tener más de 15 caracteres")
     }
 }

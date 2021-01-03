@@ -50,7 +50,7 @@ class NewContact : AppCompatActivity() {
 
             if (nombre.isNotEmpty() && apellido.isNotEmpty() && tel1.isNotEmpty() && email.isNotEmpty()){
                 if (tel2.isEmpty())
-                    tel2 = "Sin tel secundario"
+                    tel2 = "No posee"
 
                 val contacto = ObjContacto(R.drawable.ic_launcher_foreground, nombre,apellido, tel1, tel2, email)
 

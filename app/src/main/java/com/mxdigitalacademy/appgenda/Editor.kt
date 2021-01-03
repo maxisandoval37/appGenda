@@ -74,12 +74,15 @@ class Editor : AppCompatActivity() {
 
             if (nombre.isNotEmpty() && apellido.isNotEmpty() && tel1.isNotEmpty() && email.isNotEmpty()){
                 if (tel2.isEmpty())
-                    tel2 = "Sin tel secundario"
-
-                actualizarObjetoContacto(nombre,apellido,tel1,tel2,email)
-
-                lanzarMensaje("Contacto actualizado")
-                finish()
+                    tel2 = "No posee"
+                try {
+                    actualizarObjetoContacto(nombre,apellido,tel1,tel2,email)
+                    lanzarMensaje("Contacto actualizado")
+                    finish()
+                }
+                catch(e: IllegalArgumentException){
+                    lanzarMensaje(e.message.toString())
+                }
             }
             else
                 lanzarMensaje("Complete los campos restantes para continuar")
