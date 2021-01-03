@@ -16,6 +16,10 @@ class CustomAdapter(var context: Context, items:ArrayList<ObjContacto>): BaseAda
         this.items=items
     }
 
+    companion object{
+        var contactosAux: ArrayList<ObjContacto> = ArrayList(MainActivity.listaObjContactos)
+    }
+
     override fun getView(p0: Int, p1: View?, p2: ViewGroup?): View {
         var holder:ViewHolder?= null
         var vista:View? = p1
@@ -46,6 +50,31 @@ class CustomAdapter(var context: Context, items:ArrayList<ObjContacto>): BaseAda
 
     override fun getCount(): Int {
         return items?.count()!!
+    }
+
+    fun filtrarPorNombre(filtro: String){
+
+        if (filtro.isNotEmpty()) {
+            for (contacto in contactosAux){
+                for (i in filtro.indices) {
+                    if (filtro.length <= contacto.getNombre().length){
+                        if (filtro.toLowerCase()[i] == contacto.getNombre().toLowerCase()[i]){
+                            items?.clear()!!
+                            MainActivity.listaObjContactos.clear()
+                            MainActivity.listaObjContactos.add(contacto)
+                        }
+                    }
+                }
+            }
+        }
+        notifyDataSetChanged()
+    }
+
+    fun restaurarTodosLosContactos(){
+        items?.clear()!!
+        MainActivity.listaObjContactos.clear()
+        MainActivity.listaObjContactos.addAll(contactosAux)
+        notifyDataSetChanged()
     }
 
     private class ViewHolder(vista:View){
