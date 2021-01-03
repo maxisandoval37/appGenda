@@ -38,28 +38,13 @@ class MainActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    private fun filtrarDatos(filtro: String){
-
-        if (filtro.isNotEmpty()){
-            //adaptador?.items?.clear()
-
-            listaObjContactos.forEach(){
-                if (filtro.toLowerCase() == it.getNombre().toLowerCase()){
-                    listaObjContactos.add(it)
-                }
-            }
-        }
-
-        adaptador?.notifyDataSetChanged()
-    }
-
     private fun habilitarSearchView(menu: Menu?){
-        val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager //*
+        val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
         val itemBusqueda =menu?.findItem(R.id.app_bar_search)
         val vistaBusqueda = itemBusqueda?.actionView as SearchView
         vistaBusqueda.queryHint = "Buscar"
 
-        vistaBusqueda.setSearchableInfo(searchManager.getSearchableInfo(componentName))//*
+        vistaBusqueda.setSearchableInfo(searchManager.getSearchableInfo(componentName))
 
         vistaBusqueda.setOnQueryTextFocusChangeListener { _, b ->
             if (!b)
