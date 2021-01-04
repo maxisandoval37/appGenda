@@ -88,6 +88,7 @@ class MainActivity : AppCompatActivity() {
         listaObjContactos.add(ObjContacto(R.drawable.walter_white,"Walter","White","3478598723","","ww@bb.com"))
         listaObjContactos.add(ObjContacto(R.drawable.jesse_pinkman,"Jesse","Pinkman","112783498","2734892893","jesseP@gmail.com"))
         listaObjContactos.add(ObjContacto(R.drawable.gus_fring,"Gus","Fring","1132456745","","fring@gmail.com"))
+        listaObjContactos.add(ObjContacto(R.drawable.walter_white,"Walter","Fake","312398723","23423434","fake@kk.com"))
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

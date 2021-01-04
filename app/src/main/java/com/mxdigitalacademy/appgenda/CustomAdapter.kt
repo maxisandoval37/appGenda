@@ -53,15 +53,15 @@ class CustomAdapter(var context: Context, items:ArrayList<ObjContacto>): BaseAda
     }
 
     fun filtrarPorNombre(filtro: String){
-
         if (filtro.isNotEmpty()) {
+            items?.clear()!!
+            MainActivity.listaObjContactos.clear()
             for (contacto in contactosAux){
                 for (i in filtro.indices) {
                     if (filtro.length <= contacto.getNombre().length){
                         if (filtro.toLowerCase()[i] == contacto.getNombre().toLowerCase()[i]){
-                            items?.clear()!!
-                            MainActivity.listaObjContactos.clear()
-                            MainActivity.listaObjContactos.add(contacto)
+                            if (!MainActivity.listaObjContactos.contains(contacto))
+                                MainActivity.listaObjContactos.add(contacto)
                         }
                     }
                 }
