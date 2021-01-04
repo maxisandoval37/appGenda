@@ -62,7 +62,7 @@ class CustomAdapter(var context: Context, items:ArrayList<ObjContacto>): BaseAda
             MainActivity.listaObjContactos.clear()
             for (contacto in contactosAux) {
                 for (i in filtro.indices) {
-                    if (contacto.getNombre().toLowerCase().contains(filtro.toLowerCase())) {
+                    if (contacto.getNombreCompleto().toLowerCase().contains(filtro.toLowerCase())) {
                         if (!MainActivity.listaObjContactos.contains(contacto))
                             MainActivity.agregarContacto(contacto)
                     }
