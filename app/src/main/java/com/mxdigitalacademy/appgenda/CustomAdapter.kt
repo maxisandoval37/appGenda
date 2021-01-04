@@ -10,7 +10,7 @@ import android.widget.TextView
 
 class CustomAdapter(var context: Context, items:ArrayList<ObjContacto>): BaseAdapter() {
 
-    var items:ArrayList<ObjContacto>? = null
+    private var items:ArrayList<ObjContacto>? = null
 
     init {
         this.items=items
@@ -52,17 +52,19 @@ class CustomAdapter(var context: Context, items:ArrayList<ObjContacto>): BaseAda
         return items?.count()!!
     }
 
-    fun filtrarPorNombre(filtro: String){
-        if (filtro.isNotEmpty()) {
+    fun filtrarPorNombre(filtro: String) {
+        items?.clear()
+
+        if (filtro.isEmpty()) {
+           MainActivity.agregarContactos(contactosAux)
+        } else {
             items?.clear()!!
             MainActivity.listaObjContactos.clear()
-            for (contacto in contactosAux){
+            for (contacto in contactosAux) {
                 for (i in filtro.indices) {
-                    if (filtro.length <= contacto.getNombre().length){
-                        if (filtro.toLowerCase()[i] == contacto.getNombre().toLowerCase()[i]){
-                            if (!MainActivity.listaObjContactos.contains(contacto))
-                                MainActivity.listaObjContactos.add(contacto)
-                        }
+                    if (contacto.getNombre().toLowerCase().contains(filtro.toLowerCase())) {
+                        if (!MainActivity.listaObjContactos.contains(contacto))
+                            MainActivity.agregarContacto(contacto)
                     }
                 }
             }

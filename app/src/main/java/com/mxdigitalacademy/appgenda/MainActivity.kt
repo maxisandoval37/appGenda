@@ -18,6 +18,14 @@ class MainActivity : AppCompatActivity() {
 
     companion object{
         var listaObjContactos: ArrayList<ObjContacto> = ArrayList()
+
+        fun agregarContacto(contacto: ObjContacto){
+            listaObjContactos.add(contacto)
+        }
+
+        fun agregarContactos(contactos: ArrayList<ObjContacto>){
+            listaObjContactos.addAll(contactos)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {//nos permite asociar elems a nuestra interfaz

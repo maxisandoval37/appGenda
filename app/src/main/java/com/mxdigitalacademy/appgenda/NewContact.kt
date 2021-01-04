@@ -57,7 +57,7 @@ class NewContact : AppCompatActivity() {
 
                     val contacto = ObjContacto(R.drawable.ic_launcher_foreground, nombre,apellido, tel1, tel2, email)
 
-                    MainActivity.listaObjContactos.add(contacto)
+                    MainActivity.agregarContacto(contacto)
                     lanzarMensaje("Contacto guardado")
                     finish()
                 }
