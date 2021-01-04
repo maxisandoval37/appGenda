@@ -17,7 +17,7 @@ class CustomAdapter(var context: Context, items:ArrayList<ObjContacto>): BaseAda
     }
 
     companion object{
-        var contactosAux: ArrayList<ObjContacto> = ArrayList(MainActivity.listaObjContactos)
+        var contactosAux: ArrayList<ObjContacto> = ArrayList()
     }
 
     override fun getView(p0: Int, p1: View?, p2: ViewGroup?): View {
@@ -52,19 +52,20 @@ class CustomAdapter(var context: Context, items:ArrayList<ObjContacto>): BaseAda
         return items?.count()!!
     }
 
-    fun filtrarPorNombre(filtro: String) {
+    fun filtrarPorNombre(listaFiltrar: ArrayList<ObjContacto>,filtro: String) {
+        actualizarListaAux(listaFiltrar)
+
         items?.clear()
+        listaFiltrar.clear()
 
         if (filtro.isEmpty()) {
-           MainActivity.agregarContactos(contactosAux)
+            listaFiltrar.addAll(contactosAux)
         } else {
-            items?.clear()!!
-            MainActivity.listaObjContactos.clear()
             for (contacto in contactosAux) {
                 for (i in filtro.indices) {
                     if (contacto.getNombreCompleto().toLowerCase().contains(filtro.toLowerCase())) {
-                        if (!MainActivity.listaObjContactos.contains(contacto))
-                            MainActivity.agregarContacto(contacto)
+                        if (!listaFiltrar.contains(contacto))
+                            listaFiltrar.add(contacto)
                     }
                 }
             }
@@ -72,10 +73,17 @@ class CustomAdapter(var context: Context, items:ArrayList<ObjContacto>): BaseAda
         notifyDataSetChanged()
     }
 
-    fun restaurarTodosLosContactos(){
+    private fun actualizarListaAux(contactosOriginal: ArrayList<ObjContacto>){
+        for (contacto in contactosOriginal) {
+            if (!contactosAux.contains(contacto))
+                contactosAux.add(contacto)
+        }
+    }
+
+    fun restaurarTodosLosContactos(contactosOriginal: ArrayList<ObjContacto>){
         items?.clear()!!
-        MainActivity.listaObjContactos.clear()
-        MainActivity.listaObjContactos.addAll(contactosAux)
+        contactosOriginal.clear()
+        contactosOriginal.addAll(contactosAux)
         notifyDataSetChanged()
     }
 

@@ -22,13 +22,9 @@ class MainActivity : AppCompatActivity() {
         fun agregarContacto(contacto: ObjContacto){
             listaObjContactos.add(contacto)
         }
-
-        fun agregarContactos(contactos: ArrayList<ObjContacto>){
-            listaObjContactos.addAll(contactos)
-        }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {//nos permite asociar elems a nuestra interfaz
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {//permite asociar elems a nuestra interfaz
         menuInflater.inflate(R.menu.menu_main,menu)
         habilitarSearchView(menu)
         return super.onCreateOptionsMenu(menu)
@@ -56,7 +52,7 @@ class MainActivity : AppCompatActivity() {
 
         vistaBusqueda.setOnQueryTextFocusChangeListener { _, b ->
             if (!b)
-                adaptador?.restaurarTodosLosContactos()
+                adaptador?.restaurarTodosLosContactos(listaObjContactos)
         }
 
         vistaBusqueda.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
@@ -65,7 +61,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onQueryTextChange(p0: String?): Boolean {
-                adaptador?.filtrarPorNombre(p0!!)
+                adaptador?.filtrarPorNombre(listaObjContactos,p0!!)
                 return true
             }
 
