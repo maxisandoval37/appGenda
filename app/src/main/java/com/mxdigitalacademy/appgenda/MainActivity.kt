@@ -35,12 +35,20 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        fun obtenerContactoTelefonoPrincipal(tel1: String): ObjContacto?{
+        fun getContactoTelPrincipal(tel1: String): ObjContacto?{
             for (contacto in listaObjContactos){
                 if (contacto.getTelefonoPrincipal() == tel1)
                     return contacto
             }
             return null
+        }
+
+        fun existeTelefonoEnAgenda(tel1: String): Boolean{
+            var existe: Boolean = false
+            for (contacto in listaObjContactos){
+                existe = existe or (contacto.getTelefonoPrincipal() == tel1)
+            }
+            return existe
         }
     }
 
@@ -66,7 +74,7 @@ class MainActivity : AppCompatActivity() {
         val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
         val itemBusqueda = menu?.findItem(R.id.app_bar_search)
         vistaBusqueda = itemBusqueda?.actionView as SearchView
-        vistaBusqueda?.queryHint = "Buscar (nombre o apellido)"
+        vistaBusqueda?.queryHint = "Buscar"
 
         vistaBusqueda?.setSearchableInfo(searchManager.getSearchableInfo(componentName))
 

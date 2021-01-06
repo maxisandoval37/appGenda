@@ -38,6 +38,18 @@ class NewContact : AppCompatActivity() {
         Toast.makeText(this,mensaje,Toast.LENGTH_SHORT).show()
     }
 
+    private fun agregarContactoEnAgenda(contacto: ObjContacto){
+        if (!MainActivity.existeTelefonoEnAgenda(contacto.getTelefonoPrincipal())){
+            MainActivity.agregarContacto(contacto)
+            lanzarMensaje("Contacto guardado")
+            finish()
+        }
+        else{
+            lanzarMensaje("El numero "+contacto.getTelefonoPrincipal()+", se encuentra registrado")
+        }
+
+    }
+
     private fun accionBotonGuardar(){
         val boton = findViewById<Button>(R.id.btnGuardar)
 
@@ -54,12 +66,9 @@ class NewContact : AppCompatActivity() {
 
                 try {
                     ObjContacto.datosValidos(nombre,apellido,tel1,tel2,email)
-
                     val contacto = ObjContacto(R.drawable.ic_launcher_foreground, nombre,apellido, tel1, tel2, email)
 
-                    MainActivity.agregarContacto(contacto)
-                    lanzarMensaje("Contacto guardado")
-                    finish()
+                    agregarContactoEnAgenda(contacto)
                 }
                 catch(e: IllegalArgumentException){
                     lanzarMensaje(e.message.toString())

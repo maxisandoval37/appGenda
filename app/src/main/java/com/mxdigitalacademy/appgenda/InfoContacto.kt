@@ -60,7 +60,7 @@ class InfoContacto : AppCompatActivity() {
         val tel2 = findViewById<TextView>(R.id.tvTel2)
         val email = findViewById<TextView>(R.id.tvEmail)
 
-        val contactoAux = MainActivity.obtenerContactoTelefonoPrincipal(telClickeado)
+        val contactoAux = MainActivity.getContactoTelPrincipal(telClickeado)
 
         contactoAux?.getImgAvatar()?.let { fotoAvatar.setImageResource(it) }
         nombreCompleto.text = contactoAux?.getNombreCompleto()

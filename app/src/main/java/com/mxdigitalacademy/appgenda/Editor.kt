@@ -11,7 +11,7 @@ import androidx.appcompat.widget.Toolbar
 class Editor : AppCompatActivity() {
 
     private var toolbar: Toolbar? = null
-    private var idContactoActual:Int = 0
+    private var telClickeado:String = ""
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
@@ -42,11 +42,11 @@ class Editor : AppCompatActivity() {
         val tel2Editor = findViewById<EditText>(R.id.etTelSecundarioEditor)
         val emailEditor = findViewById<EditText>(R.id.etEmailEditor)
 
-        nombreEditor.setText(MainActivity.listaObjContactos[idContactoActual].getNombre())
-        apellidoEditor.setText(MainActivity.listaObjContactos[idContactoActual].getApellido())
-        tel1Editor.setText(MainActivity.listaObjContactos[idContactoActual].getTelefonoPrincipal())
-        tel2Editor.setText(MainActivity.listaObjContactos[idContactoActual].getTelefonoSecundario())
-        emailEditor.setText(MainActivity.listaObjContactos[idContactoActual].getEmail())
+        nombreEditor.setText(MainActivity.getContactoTelPrincipal(telClickeado)?.getNombre())
+        apellidoEditor.setText(MainActivity.getContactoTelPrincipal(telClickeado)?.getApellido())
+        tel1Editor.setText(MainActivity.getContactoTelPrincipal(telClickeado)?.getTelefonoPrincipal())
+        tel2Editor.setText(MainActivity.getContactoTelPrincipal(telClickeado)?.getTelefonoSecundario())
+        emailEditor.setText(MainActivity.getContactoTelPrincipal(telClickeado)?.getEmail())
     }
 
     private fun lanzarMensaje(mensaje: String){
@@ -54,12 +54,12 @@ class Editor : AppCompatActivity() {
     }
 
     private fun actualizarObjetoContacto(nombre: String, apellido: String, tel1: String, tel2: String, email: String){
-        //MainActivity.listaObjContactos[idContactoActual].setImgAvatar(0)
-        MainActivity.listaObjContactos[idContactoActual].setNombre(nombre)
-        MainActivity.listaObjContactos[idContactoActual].setApellido(apellido)
-        MainActivity.listaObjContactos[idContactoActual].setTelPrincipal(tel1)
-        MainActivity.listaObjContactos[idContactoActual].setTelSecundario(tel2)
-        MainActivity.listaObjContactos[idContactoActual].setEmail(email)
+        //MainActivity.getContactoTelPrincipal(telClickeado)?.setImgAvatar(0)
+        MainActivity.getContactoTelPrincipal(telClickeado)?.setNombre(nombre)
+        MainActivity.getContactoTelPrincipal(telClickeado)?.setApellido(apellido)
+        MainActivity.getContactoTelPrincipal(telClickeado)?.setTelPrincipal(tel1)
+        MainActivity.getContactoTelPrincipal(telClickeado)?.setTelSecundario(tel2)
+        MainActivity.getContactoTelPrincipal(telClickeado)?.setEmail(email)
     }
 
     private fun accionBotonGuardar(){
@@ -102,7 +102,7 @@ class Editor : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_editor)
 
-        idContactoActual= intent.getStringExtra("ID_EDITOR")?.toInt()!!
+        telClickeado = intent.getStringExtra("nroTelefonoClick").toString()
         iniciarToolbar()
         setearInfoInputsTexts()
         accionBotonGuardar()
