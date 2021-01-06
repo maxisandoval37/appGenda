@@ -27,7 +27,7 @@ class InfoContacto : AppCompatActivity() {
 
             R.id.editarContacto -> {
                 val intent = Intent(this,Editor::class.java)
-                intent.putExtra("nroTelefonoClick",telClickeado)//fixear
+                intent.putExtra("nroTelefonoClick",telClickeado)
                 startActivity(intent)
                 return true
             }
@@ -41,16 +41,16 @@ class InfoContacto : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    private fun hablitraBotonVolver(){
-        val actionBar = supportActionBar
-        actionBar?.setDisplayHomeAsUpEnabled(true)
-    }
-
     private fun iniciarToolbar(){
         toolbar = findViewById(R.id.toolbar)
         toolbar?.title = ""
         setSupportActionBar(toolbar)
         hablitraBotonVolver()
+    }
+
+    private fun hablitraBotonVolver(){
+        val actionBar = supportActionBar
+        actionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     private fun setearInfoElemsVisuales(){

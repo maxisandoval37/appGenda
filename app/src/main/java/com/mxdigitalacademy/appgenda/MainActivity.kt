@@ -26,6 +26,14 @@ class MainActivity : AppCompatActivity() {
             listaObjContactos.add(contacto)
         }
 
+        fun getContactoTelPrincipal(tel1: String): ObjContacto?{
+            for (contacto in listaObjContactos){
+                if (contacto.getTelefonoPrincipal() == tel1)
+                    return contacto
+            }
+            return null
+        }
+
         fun elimilarContactoPorTelefono(tel1: String){
             for (x:Int in 0 .. listaObjContactos.size){
                 if (listaObjContactos[x].getTelefonoPrincipal() == tel1){
@@ -35,16 +43,8 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        fun getContactoTelPrincipal(tel1: String): ObjContacto?{
-            for (contacto in listaObjContactos){
-                if (contacto.getTelefonoPrincipal() == tel1)
-                    return contacto
-            }
-            return null
-        }
-
         fun existeTelefonoEnAgenda(tel1: String): Boolean{
-            var existe: Boolean = false
+            var existe = false
             for (contacto in listaObjContactos){
                 existe = existe or (contacto.getTelefonoPrincipal() == tel1)
             }
@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {//permite asociar elems a nuestra interfaz
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_main,menu)
         habilitarSearchView(menu)
         return super.onCreateOptionsMenu(menu)
@@ -63,7 +63,7 @@ class MainActivity : AppCompatActivity() {
             R.id.addContact -> {
                 val intent = Intent(this,NewContact::class.java)
                 startActivity(intent)
-
+                restaurarElemsVisuales()
                 return true
             }
         }
@@ -116,6 +116,11 @@ class MainActivity : AppCompatActivity() {
         accionesListView()
     }
 
+    private fun restaurarElemsVisuales(){
+        vistaBusqueda?.setQuery("",true)//borrar el input en el searchView
+        inicializarListView(listaObjContactos)//restaurar la lista, y no queden datos obsoletos en pantalla
+    }
+
     private fun accionesListView(){
         listaVisual?.setOnItemClickListener { view, _, i, _ ->
             val nroTelefonoClick= view[i].findViewById<TextView>(R.id.tvNumTelefono).text.toString()
@@ -124,8 +129,7 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra("nroTelefonoClick",nroTelefonoClick)
             startActivity(intent)
 
-            vistaBusqueda?.setQuery("",true)//borrar lo que la persona escribio en la busqueda
-            inicializarListView(listaObjContactos)//para restaurar la lista, y no queden datos obsoletos en pantalla (ej cuando borramos un item)
+            restaurarElemsVisuales()
         }
     }
 

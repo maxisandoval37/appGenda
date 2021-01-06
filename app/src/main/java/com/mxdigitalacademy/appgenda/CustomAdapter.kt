@@ -50,10 +50,10 @@ class CustomAdapter(var context: Context, items:ArrayList<ObjContacto>): BaseAda
         return items?.count()!!
     }
 
-    fun filter(Notes: List<ObjContacto>, filtro: String): ArrayList<ObjContacto> {
+    fun filter(contactos: List<ObjContacto>, filtro: String): ArrayList<ObjContacto> {
         val contactosAuxFiltro: ArrayList<ObjContacto> = ArrayList()
 
-        for (contacto in Notes) {
+        for (contacto in contactos) {
             if (contacto.getNombreCompleto().toLowerCase(Locale.ROOT).contains(filtro.toLowerCase(Locale.ROOT))){
                 contactosAuxFiltro.add(contacto)
             }
