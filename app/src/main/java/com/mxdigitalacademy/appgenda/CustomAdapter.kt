@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
+import java.util.*
+import kotlin.collections.ArrayList
 
 class CustomAdapter(var context: Context, items:ArrayList<ObjContacto>): BaseAdapter() {
 
@@ -14,10 +16,6 @@ class CustomAdapter(var context: Context, items:ArrayList<ObjContacto>): BaseAda
 
     init {
         this.items=items
-    }
-
-    companion object{
-        var contactosAux: ArrayList<ObjContacto> = ArrayList()
     }
 
     override fun getView(p0: Int, p1: View?, p2: ViewGroup?): View {
@@ -52,39 +50,16 @@ class CustomAdapter(var context: Context, items:ArrayList<ObjContacto>): BaseAda
         return items?.count()!!
     }
 
-    fun filtrarPorNombre(listaFiltrar: ArrayList<ObjContacto>,filtro: String) {
-        actualizarListaAux(listaFiltrar)
+    fun filter(Notes: List<ObjContacto>, filtro: String): ArrayList<ObjContacto> {
+        val contactosAuxFiltro: ArrayList<ObjContacto> = ArrayList()
 
-        items?.clear()
-        listaFiltrar.clear()
-
-        if (filtro.isEmpty()) {
-            listaFiltrar.addAll(contactosAux)
-        } else {
-            for (contacto in contactosAux) {
-                for (i in filtro.indices) {
-                    if (contacto.getNombreCompleto().toLowerCase().contains(filtro.toLowerCase())) {
-                        if (!listaFiltrar.contains(contacto))
-                            listaFiltrar.add(contacto)
-                    }
-                }
+        for (contacto in Notes) {
+            if (contacto.getNombreCompleto().toLowerCase(Locale.ROOT).contains(filtro.toLowerCase(Locale.ROOT))){
+                contactosAuxFiltro.add(contacto)
             }
         }
         notifyDataSetChanged()
-    }
-
-    private fun actualizarListaAux(contactosOriginal: ArrayList<ObjContacto>){
-        for (contacto in contactosOriginal) {
-            if (!contactosAux.contains(contacto))
-                contactosAux.add(contacto)
-        }
-    }
-
-    fun restaurarTodosLosContactos(contactosOriginal: ArrayList<ObjContacto>){
-        items?.clear()!!
-        contactosOriginal.clear()
-        contactosOriginal.addAll(contactosAux)
-        notifyDataSetChanged()
+        return contactosAuxFiltro
     }
 
     private class ViewHolder(vista:View){

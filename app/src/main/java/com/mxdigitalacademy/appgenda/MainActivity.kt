@@ -3,24 +3,44 @@ package com.mxdigitalacademy.appgenda
 import android.app.SearchManager
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ListView
 import android.widget.SearchView
+import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.view.get
 
 class MainActivity : AppCompatActivity() {
     private var toolbar: Toolbar? = null
     private var listaVisual: ListView? = null
     private var adaptador: CustomAdapter? = null
+    private var vistaBusqueda:SearchView? = null
 
     companion object{
         var listaObjContactos: ArrayList<ObjContacto> = ArrayList()
 
         fun agregarContacto(contacto: ObjContacto){
             listaObjContactos.add(contacto)
+        }
+
+        fun elimilarContactoPorTelefono(tel1: String){
+            for (x:Int in 0 .. listaObjContactos.size){
+                if (listaObjContactos[x].getTelefonoPrincipal() == tel1){
+                    listaObjContactos.remove(listaObjContactos[x])
+                    break
+                }
+            }
+        }
+
+        fun obtenerContactoTelefonoPrincipal(tel1: String): ObjContacto?{
+            for (contacto in listaObjContactos){
+                if (contacto.getTelefonoPrincipal() == tel1)
+                    return contacto
+            }
+            return null
         }
     }
 
@@ -44,25 +64,31 @@ class MainActivity : AppCompatActivity() {
 
     private fun habilitarSearchView(menu: Menu?){
         val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
-        val itemBusqueda =menu?.findItem(R.id.app_bar_search)
-        val vistaBusqueda = itemBusqueda?.actionView as SearchView
-        vistaBusqueda.queryHint = "Buscar"
+        val itemBusqueda = menu?.findItem(R.id.app_bar_search)
+        vistaBusqueda = itemBusqueda?.actionView as SearchView
+        vistaBusqueda?.queryHint = "Buscar (nombre o apellido)"
 
-        vistaBusqueda.setSearchableInfo(searchManager.getSearchableInfo(componentName))
+        vistaBusqueda?.setSearchableInfo(searchManager.getSearchableInfo(componentName))
 
-        vistaBusqueda.setOnQueryTextFocusChangeListener { _, b ->
+        vistaBusqueda?.setOnQueryTextFocusChangeListener { _, b ->
             if (!b)
-                adaptador?.restaurarTodosLosContactos(listaObjContactos)
+                inicializarListView(listaObjContactos)
         }
 
-        vistaBusqueda.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
+        vistaBusqueda?.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(p0: String?): Boolean {
                 return true
             }
 
             override fun onQueryTextChange(p0: String?): Boolean {
-                adaptador?.filtrarPorNombre(listaObjContactos,p0!!)
-                return true
+                if (p0?.isEmpty()!!){
+                    inicializarListView(listaObjContactos)
+                    return false
+                }
+                else{
+                    inicializarListView(adaptador?.filter(listaObjContactos,p0)!!)
+                    return true
+                }
             }
 
         })
@@ -74,16 +100,24 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
     }
 
-    private fun listView(){
-        listaVisual = findViewById<ListView>(R.id.listaContactos)
+    private fun inicializarListView(contactos: ArrayList<ObjContacto>){
+        listaVisual = findViewById(R.id.listaContactos)
 
-        adaptador = CustomAdapter(this,listaObjContactos)
+        adaptador = CustomAdapter(this, contactos)
         listaVisual?.adapter = adaptador
+        accionesListView()
+    }
 
-        listaVisual?.setOnItemClickListener { _, _, i, _ ->
+    private fun accionesListView(){
+        listaVisual?.setOnItemClickListener { view, _, i, _ ->
+            val nroTelefonoClick= view[i].findViewById<TextView>(R.id.tvNumTelefono).text.toString()
+
             val intent = Intent(this,InfoContacto::class.java)
-            intent.putExtra("ID",i.toString())
+            intent.putExtra("nroTelefonoClick",nroTelefonoClick)
             startActivity(intent)
+
+            vistaBusqueda?.setQuery("",true)//borrar lo que la persona escribio en la busqueda
+            inicializarListView(listaObjContactos)//para restaurar la lista, y no queden datos obsoletos en pantalla (ej cuando borramos un item)
         }
     }
 
@@ -102,7 +136,7 @@ class MainActivity : AppCompatActivity() {
 
         agregarContactosDePrueba()
         iniciarToolbar()
-        listView()
+        inicializarListView(listaObjContactos)
     }
 
     override fun onResume() {

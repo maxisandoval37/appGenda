@@ -11,7 +11,7 @@ import androidx.appcompat.widget.Toolbar
 
 class InfoContacto : AppCompatActivity() {
     private var toolbar: Toolbar? = null
-    private var indexObjContacto:Int? =null
+    private var telClickeado:String = ""
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_info_contacto,menu)
@@ -27,13 +27,13 @@ class InfoContacto : AppCompatActivity() {
 
             R.id.editarContacto -> {
                 val intent = Intent(this,Editor::class.java)
-                intent.putExtra("ID_EDITOR",indexObjContacto.toString())
+                intent.putExtra("nroTelefonoClick",telClickeado)//fixear
                 startActivity(intent)
                 return true
             }
 
             R.id.borrarContacto -> {
-                indexObjContacto?.let { MainActivity.listaObjContactos.removeAt(it) }
+                MainActivity.elimilarContactoPorTelefono(telClickeado)
                 finish()
                 return true
             }
@@ -60,8 +60,7 @@ class InfoContacto : AppCompatActivity() {
         val tel2 = findViewById<TextView>(R.id.tvTel2)
         val email = findViewById<TextView>(R.id.tvEmail)
 
-        indexObjContacto = intent.getStringExtra("ID")?.toInt()
-        val contactoAux = indexObjContacto?.let { MainActivity.listaObjContactos[it] }
+        val contactoAux = MainActivity.obtenerContactoTelefonoPrincipal(telClickeado)
 
         contactoAux?.getImgAvatar()?.let { fotoAvatar.setImageResource(it) }
         nombreCompleto.text = contactoAux?.getNombreCompleto()
@@ -74,6 +73,7 @@ class InfoContacto : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_info_contacto)
 
+        telClickeado = intent.getStringExtra("nroTelefonoClick").toString()
         iniciarToolbar()
         setearInfoElemsVisuales()
     }
