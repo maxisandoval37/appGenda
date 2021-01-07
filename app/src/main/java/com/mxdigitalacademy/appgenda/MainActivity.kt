@@ -6,9 +6,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.ListView
-import android.widget.SearchView
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.get
@@ -18,6 +16,7 @@ class MainActivity : AppCompatActivity() {
     private var listaVisual: ListView? = null
     private var adaptador: CustomAdapter? = null
     private var vistaBusqueda:SearchView? = null
+    private var viewSwitcher: ViewSwitcher? = null
 
     companion object{
         var listaObjContactos: ArrayList<ObjContacto> = ArrayList()
@@ -55,6 +54,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_main,menu)
         habilitarSearchView(menu)
+        habilitarSwitchViewStyle(menu)
         return super.onCreateOptionsMenu(menu)
     }
 
@@ -102,6 +102,18 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
+    private fun habilitarSwitchViewStyle(menu: Menu?){
+        viewSwitcher = findViewById(R.id.viewSwitcher)
+
+        val itemSwitch = menu?.findItem(R.id.app_bar_switch)
+        itemSwitch?.setActionView(R.layout.switch_item)
+        val switchView = itemSwitch?.actionView?.findViewById<Switch>(R.id.switchViewStyle)
+
+        switchView?.setOnCheckedChangeListener { compoundButton, b ->
+            viewSwitcher?.showNext()
+        }
+    }
+
     private fun iniciarToolbar(){
         toolbar = findViewById(R.id.toolbar)
         toolbar?.setTitle(R.string.app_name)
@@ -132,6 +144,7 @@ class MainActivity : AppCompatActivity() {
             restaurarElemsVisuales()
         }
     }
+
 
     private fun agregarContactosDePrueba(){
         if (listaObjContactos.isEmpty()){
