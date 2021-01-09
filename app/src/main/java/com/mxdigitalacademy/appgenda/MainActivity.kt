@@ -112,7 +112,7 @@ class MainActivity : AppCompatActivity() {
 
         switchView?.setOnCheckedChangeListener { compoundButton, b ->
             viewSwitcher?.showNext()
-            adaptador?.cambiarAGrid()
+            adaptador?.cambiarTipoVista()
         }
     }
 

@@ -63,7 +63,7 @@ class CustomAdapter(var context: Context, items:ArrayList<ObjContacto>): BaseAda
         return contactosAuxFiltro
     }
 
-    fun cambiarAGrid(){
+    fun cambiarTipoVista(){
         tipoTemplate = if(tipoTemplate == R.layout.template_contacto)
             R.layout.template_contacto_grid
         else
