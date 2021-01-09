@@ -13,6 +13,7 @@ import kotlin.collections.ArrayList
 class CustomAdapter(var context: Context, items:ArrayList<ObjContacto>): BaseAdapter() {
 
     private var items:ArrayList<ObjContacto>? = null
+    var tipoTemplate:Int = R.layout.template_contacto
 
     init {
         this.items=items
@@ -23,7 +24,7 @@ class CustomAdapter(var context: Context, items:ArrayList<ObjContacto>): BaseAda
         var vista:View? = p1
 
         if (vista==null){
-            vista = LayoutInflater.from(context).inflate(R.layout.template_contacto,null)
+            vista = LayoutInflater.from(context).inflate(tipoTemplate,null)
             holder = ViewHolder(vista)
             vista.tag = holder
         }
@@ -60,6 +61,15 @@ class CustomAdapter(var context: Context, items:ArrayList<ObjContacto>): BaseAda
         }
         notifyDataSetChanged()
         return contactosAuxFiltro
+    }
+
+    fun cambiarAGrid(){
+        tipoTemplate = if(tipoTemplate == R.layout.template_contacto)
+            R.layout.template_contacto_grid
+        else
+            R.layout.template_contacto
+
+        notifyDataSetChanged()
     }
 
     private class ViewHolder(vista:View){

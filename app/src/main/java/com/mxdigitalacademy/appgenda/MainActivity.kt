@@ -14,6 +14,7 @@ import androidx.core.view.get
 class MainActivity : AppCompatActivity() {
     private var toolbar: Toolbar? = null
     private var listaVisual: ListView? = null
+    private var listaGrid:GridView? = null
     private var adaptador: CustomAdapter? = null
     private var vistaBusqueda:SearchView? = null
     private var viewSwitcher: ViewSwitcher? = null
@@ -80,7 +81,7 @@ class MainActivity : AppCompatActivity() {
 
         vistaBusqueda?.setOnQueryTextFocusChangeListener { _, b ->
             if (!b)
-                inicializarListView(listaObjContactos)
+                inicializarListYGridView(listaObjContactos)
         }
 
         vistaBusqueda?.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
@@ -90,11 +91,11 @@ class MainActivity : AppCompatActivity() {
 
             override fun onQueryTextChange(p0: String?): Boolean {
                 if (p0?.isEmpty()!!){
-                    inicializarListView(listaObjContactos)
+                    inicializarListYGridView(listaObjContactos)
                     return false
                 }
                 else{
-                    inicializarListView(adaptador?.filter(listaObjContactos,p0)!!)
+                    inicializarListYGridView(adaptador?.filter(listaObjContactos,p0)!!)
                     return true
                 }
             }
@@ -111,6 +112,7 @@ class MainActivity : AppCompatActivity() {
 
         switchView?.setOnCheckedChangeListener { compoundButton, b ->
             viewSwitcher?.showNext()
+            adaptador?.cambiarAGrid()
         }
     }
 
@@ -120,20 +122,17 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
     }
 
-    private fun inicializarListView(contactos: ArrayList<ObjContacto>){
+    private fun inicializarListYGridView(contactos: ArrayList<ObjContacto>){
         listaVisual = findViewById(R.id.listaContactos)
+        listaGrid = findViewById<GridView>(R.id.gridContactos)
 
         adaptador = CustomAdapter(this, contactos)
         listaVisual?.adapter = adaptador
-        accionesListView()
+        listaGrid?.adapter = adaptador
+        accionesListYGridView()
     }
 
-    private fun restaurarElemsVisuales(){
-        vistaBusqueda?.setQuery("",true)//borrar el input en el searchView
-        inicializarListView(listaObjContactos)//restaurar la lista, y no queden datos obsoletos en pantalla
-    }
-
-    private fun accionesListView(){
+    private fun accionesListYGridView(){
         listaVisual?.setOnItemClickListener { view, _, i, _ ->
             val nroTelefonoClick= view[i].findViewById<TextView>(R.id.tvNumTelefono).text.toString()
 
@@ -145,6 +144,10 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun restaurarElemsVisuales(){
+        vistaBusqueda?.setQuery("",true)//borrar el input en el searchView
+        inicializarListYGridView(listaObjContactos)//restaurar la lista, y no queden datos obsoletos en pantalla
+    }
 
     private fun agregarContactosDePrueba(){
         if (listaObjContactos.isEmpty()){
@@ -161,7 +164,7 @@ class MainActivity : AppCompatActivity() {
 
         agregarContactosDePrueba()
         iniciarToolbar()
-        inicializarListView(listaObjContactos)
+        inicializarListYGridView(listaObjContactos)
     }
 
     override fun onResume() {
