@@ -124,16 +124,29 @@ class MainActivity : AppCompatActivity() {
 
     private fun inicializarListYGridView(contactos: ArrayList<ObjContacto>){
         listaVisual = findViewById(R.id.listaContactos)
-        listaGrid = findViewById<GridView>(R.id.gridContactos)
+        listaGrid = findViewById(R.id.gridContactos)
 
         adaptador = CustomAdapter(this, contactos)
         listaVisual?.adapter = adaptador
         listaGrid?.adapter = adaptador
-        accionesListYGridView()
+        accionesListView()
+        accionesGridView()
     }
 
-    private fun accionesListYGridView(){
+    private fun accionesListView(){
         listaVisual?.setOnItemClickListener { view, _, i, _ ->
+            val nroTelefonoClick= view[i].findViewById<TextView>(R.id.tvNumTelefono).text.toString()
+
+            val intent = Intent(this,InfoContacto::class.java)
+            intent.putExtra("nroTelefonoClick",nroTelefonoClick)
+            startActivity(intent)
+
+            restaurarElemsVisuales()
+        }
+    }
+
+    private fun accionesGridView(){
+        listaGrid?.setOnItemClickListener { view, _, i, _ ->
             val nroTelefonoClick= view[i].findViewById<TextView>(R.id.tvNumTelefono).text.toString()
 
             val intent = Intent(this,InfoContacto::class.java)
