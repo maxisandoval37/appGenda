@@ -7,10 +7,14 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.*
+import android.widget.SearchView
+import android.widget.Switch
+import android.widget.TextView
+import android.widget.ViewSwitcher
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.view.ActionMode
 import androidx.appcompat.widget.Toolbar
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mxdigitalacademy.appgenda.R
@@ -18,6 +22,7 @@ import com.mxdigitalacademy.appgenda.adaptador.ClickListener
 import com.mxdigitalacademy.appgenda.adaptador.CustomAdapter
 import com.mxdigitalacademy.appgenda.adaptador.LongClickListener
 import com.mxdigitalacademy.appgenda.modelo.ObjContacto
+
 
 class MainActivity : AppCompatActivity() {
     private var toolbar: Toolbar? = null
@@ -118,20 +123,19 @@ class MainActivity : AppCompatActivity() {
         itemSwitch?.setActionView(R.layout.switch_item)
         val switchView = itemSwitch?.actionView?.findViewById<Switch>(R.id.switchViewStyle)
 
-        //cambiar tipo de vista
         switchView?.setOnCheckedChangeListener { _, b ->
-            if (b){
-                eliminarTerminosBuscados()
-                viewSwitcher?.showNext()
-                inicializarListaRecyclerView(R.layout.template_contacto_grid)
-            }
-            else{
-                eliminarTerminosBuscados()
-                viewSwitcher?.showNext()
-                inicializarListaRecyclerView(R.layout.template_contacto)
-            }
+            switchCambiarTipoDeVista(b)
         }
 
+    }
+
+    private fun switchCambiarTipoDeVista(estado: Boolean){
+        eliminarTerminosBuscados()
+        viewSwitcher?.showNext()
+        if (estado)
+            inicializarListaRecyclerView(R.layout.template_contacto_grid)
+        else
+            inicializarListaRecyclerView(R.layout.template_contacto)
     }
 
     private fun iniciarToolbar(){
@@ -144,6 +148,7 @@ class MainActivity : AppCompatActivity() {
         listaRecyclerView = findViewById(R.id.rv_Contactos)
         layoutManager = LinearLayoutManager(this)
         listaRecyclerView?.layoutManager = layoutManager
+        listaRecyclerView?.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
 
         accionesListaRecyclerView(tipoVista)
 

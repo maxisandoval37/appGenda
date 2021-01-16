@@ -15,7 +15,7 @@ import kotlin.collections.ArrayList
 class CustomAdapter(items:ArrayList<ObjContacto>, var tipoVista: Int, var clickListener: ClickListener, var longClickListener: LongClickListener): RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
 
     private var _items: ArrayList<ObjContacto>? = null
-    private var _vievHolder: ViewHolder? = null
+    private var _viewHolder: ViewHolder? = null
     private var _multiseleccion = false
     private var _itemsSeleccionados: ArrayList<Int>? = null
 
@@ -26,8 +26,8 @@ class CustomAdapter(items:ArrayList<ObjContacto>, var tipoVista: Int, var clickL
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val vista = LayoutInflater.from(parent.context).inflate(tipoVista, parent,false)
-        this._vievHolder = ViewHolder(vista, clickListener, longClickListener)
-        return this._vievHolder!!
+        this._viewHolder = ViewHolder(vista, clickListener, longClickListener)
+        return this._viewHolder!!
     }
 
     override fun getItemCount(): Int {
