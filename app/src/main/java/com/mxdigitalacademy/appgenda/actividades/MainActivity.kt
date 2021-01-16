@@ -111,6 +111,29 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
+    private fun habilitarSwitchViewStyle(menu: Menu?){
+        viewSwitcher = findViewById(R.id.viewSwitcher)
+
+        val itemSwitch = menu?.findItem(R.id.app_bar_switch)
+        itemSwitch?.setActionView(R.layout.switch_item)
+        val switchView = itemSwitch?.actionView?.findViewById<Switch>(R.id.switchViewStyle)
+
+        //cambiar tipo de vista
+        switchView?.setOnCheckedChangeListener { _, b ->
+            if (b){
+                eliminarTerminosBuscados()
+                viewSwitcher?.showNext()
+                inicializarListaRecyclerView(R.layout.template_contacto_grid)
+            }
+            else{
+                eliminarTerminosBuscados()
+                viewSwitcher?.showNext()
+                inicializarListaRecyclerView(R.layout.template_contacto)
+            }
+        }
+
+    }
+
     private fun iniciarToolbar(){
         toolbar = findViewById(R.id.toolbar)
         toolbar?.setTitle(R.string.app_name)
