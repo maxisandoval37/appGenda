@@ -164,6 +164,16 @@ class MainActivity : AppCompatActivity() {
             }
         }, object: LongClickListener {
             override fun longClick(vista: View, index: Int) {
+
+                if (!estadoActionMode){
+                    startSupportActionMode(callback!!)
+                    estadoActionMode = true
+                    adaptador?.seleccionarItem(index)
+                }
+                else
+                    adaptador?.seleccionarItem(index)
+
+                setTituloSeleccionados(adaptador?.getItemsSeleccionadosCount()!!)
             }
 
         })
@@ -209,6 +219,13 @@ class MainActivity : AppCompatActivity() {
             }
 
         }
+    }
+
+    private fun accionesItemsToolbarContextual(item: MenuItem){
+        when (item.itemId){
+            R.id.ItemEliminar -> adaptador?.eliminarSeleccionados()
+        }
+
     }
 
     private fun agregarContactosDePrueba(){
