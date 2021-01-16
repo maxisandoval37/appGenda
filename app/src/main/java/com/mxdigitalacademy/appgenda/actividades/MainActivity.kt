@@ -85,6 +85,32 @@ class MainActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
+    private fun habilitarSearchView(menu: Menu?){
+        val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
+        val itemBusqueda = menu?.findItem(R.id.app_bar_search)
+        vistaBusqueda = itemBusqueda?.actionView as SearchView
+        vistaBusqueda?.queryHint = "Buscar"
+
+        vistaBusqueda?.setSearchableInfo(searchManager.getSearchableInfo(componentName))
+
+        vistaBusqueda?.setOnQueryTextFocusChangeListener { _, b ->
+            if (!b)
+                eliminarTerminosBuscados()
+        }
+
+        vistaBusqueda?.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(p0: String?): Boolean {
+                return true
+            }
+
+            override fun onQueryTextChange(p0: String?): Boolean {
+                adaptador?.filter(listaObjContactos,p0!!)
+                return true
+            }
+
+        })
+    }
+
     private fun iniciarToolbar(){
         toolbar = findViewById(R.id.toolbar)
         toolbar?.setTitle(R.string.app_name)
@@ -105,26 +131,16 @@ class MainActivity : AppCompatActivity() {
         adaptador = CustomAdapter(listaObjContactos, tipoVista,object: ClickListener {
             override fun onClick(vista: View, index: Int) {
 
-                    val nroTelefonoClick = vista.findViewById<TextView>(R.id.tvNumTelefono).text.toString()
+                val nroTelefonoClick = vista.findViewById<TextView>(R.id.tvNumTelefono).text.toString()
 
-                    val intent = Intent(this@MainActivity, InfoContacto::class.java)
-                    intent.putExtra("nroTelefonoClick",nroTelefonoClick)
-                    startActivity(intent)
+                val intent = Intent(this@MainActivity, InfoContacto::class.java)
+                intent.putExtra("nroTelefonoClick",nroTelefonoClick)
+                startActivity(intent)
 
-                    eliminarTerminosBuscados()
+                eliminarTerminosBuscados()
             }
         }, object: LongClickListener {
             override fun longClick(vista: View, index: Int) {
-
-                if (!estadoActionMode){
-                    startSupportActionMode(callback!!)
-                    estadoActionMode = true
-                    adaptador?.seleccionarItem(index)
-                }
-                else
-                    adaptador?.seleccionarItem(index)
-
-                setTituloSeleccionados(adaptador?.getItemsSeleccionadosCount()!!)
             }
 
         })
