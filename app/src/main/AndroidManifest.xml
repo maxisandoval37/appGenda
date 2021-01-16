@@ -8,8 +8,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppGenda">
-        <activity android:name=".Editor"></activity>
-        <activity android:name=".MainActivity">
+        <activity android:name=".actividades.Editor"></activity>
+        <activity android:name=".actividades.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -17,11 +17,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".InfoContacto"
-            android:parentActivityName=".MainActivity" />
+            android:name=".actividades.InfoContacto"
+            android:parentActivityName=".actividades.MainActivity" />
         <activity
-            android:name=".NewContact"
-            android:parentActivityName=".MainActivity" />
+            android:name=".actividades.NewContact"
+            android:parentActivityName=".actividades.MainActivity" />
     </application>
 
 </manifest>

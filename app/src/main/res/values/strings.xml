@@ -17,4 +17,5 @@
     <string name="bt_guardar">Guardar</string>
     <string name="borrar">borrar</string>
     <string name="editar">editar</string>
+    <string name="eliminar">eliminar</string>
 </resources>

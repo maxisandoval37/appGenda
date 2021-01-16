@@ -1,4 +1,4 @@
-package com.mxdigitalacademy.appgenda
+package com.mxdigitalacademy.appgenda.actividades
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -8,6 +8,7 @@ import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
+import com.mxdigitalacademy.appgenda.R
 
 class InfoContacto : AppCompatActivity() {
     private var toolbar: Toolbar? = null
@@ -26,14 +27,14 @@ class InfoContacto : AppCompatActivity() {
             }
 
             R.id.editarContacto -> {
-                val intent = Intent(this,Editor::class.java)
+                val intent = Intent(this, Editor::class.java)
                 intent.putExtra("nroTelefonoClick",telClickeado)
                 startActivity(intent)
                 return true
             }
 
             R.id.borrarContacto -> {
-                MainActivity.elimilarContactoPorTelefono(telClickeado)
+                MainActivity.eliminarContactoPorTelefono(telClickeado)
                 finish()
                 return true
             }

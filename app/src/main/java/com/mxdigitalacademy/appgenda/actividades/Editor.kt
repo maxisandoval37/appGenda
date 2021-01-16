@@ -1,4 +1,4 @@
-package com.mxdigitalacademy.appgenda
+package com.mxdigitalacademy.appgenda.actividades
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -7,11 +7,12 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
+import com.mxdigitalacademy.appgenda.R
 
 class Editor : AppCompatActivity() {
 
     private var toolbar: Toolbar? = null
-    private var telClickeado:String = ""
+    private var telClickeado = ""
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){

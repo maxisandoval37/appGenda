@@ -1,4 +1,4 @@
-package com.mxdigitalacademy.appgenda
+package com.mxdigitalacademy.appgenda.actividades
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -7,6 +7,9 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
+import com.mxdigitalacademy.appgenda.R
+import com.mxdigitalacademy.appgenda.actividades.MainActivity
+import com.mxdigitalacademy.appgenda.modelo.ObjContacto
 
 class NewContact : AppCompatActivity() {
 
@@ -45,7 +48,7 @@ class NewContact : AppCompatActivity() {
             finish()
         }
         else{
-            lanzarMensaje("El numero "+contacto.getTelefonoPrincipal()+", se encuentra registrado")
+            lanzarMensaje("El número "+contacto.getTelefonoPrincipal()+", se encuentra registrado")
         }
 
     }
@@ -66,7 +69,7 @@ class NewContact : AppCompatActivity() {
 
                 try {
                     ObjContacto.datosValidos(nombre,apellido,tel1,tel2,email)
-                    val contacto = ObjContacto(R.drawable.ic_launcher_foreground, nombre,apellido, tel1, tel2, email)
+                    val contacto = ObjContacto(R.drawable.ic_launcher_foreground, nombre, apellido, tel1, tel2, email)
 
                     agregarContactoEnAgenda(contacto)
                 }

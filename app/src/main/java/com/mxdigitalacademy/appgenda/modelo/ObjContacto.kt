@@ -1,4 +1,4 @@
-package com.mxdigitalacademy.appgenda
+package com.mxdigitalacademy.appgenda.modelo
 
 class ObjContacto(imgAvatar: Int, nombre: String, apellido: String, telefonoP: String, telefonoS: String?, email: String) {
 
