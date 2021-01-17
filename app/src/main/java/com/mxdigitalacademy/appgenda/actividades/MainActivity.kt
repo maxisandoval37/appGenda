@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.view.ActionMode
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mxdigitalacademy.appgenda.R
@@ -147,6 +148,12 @@ class MainActivity : AppCompatActivity() {
     private fun inicializarListaRecyclerView(tipoVista: Int){
         listaRecyclerView = findViewById(R.id.rv_Contactos)
         layoutManager = LinearLayoutManager(this)
+
+        if (tipoVista == R.layout.template_contacto_grid){
+            layoutManager = GridLayoutManager(this, 2)
+            listaRecyclerView?.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.HORIZONTAL))
+        }
+
         listaRecyclerView?.layoutManager = layoutManager
         listaRecyclerView?.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
 
