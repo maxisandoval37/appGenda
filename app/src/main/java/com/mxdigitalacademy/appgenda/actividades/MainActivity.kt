@@ -24,7 +24,6 @@ import com.mxdigitalacademy.appgenda.adaptador.CustomAdapter
 import com.mxdigitalacademy.appgenda.adaptador.LongClickListener
 import com.mxdigitalacademy.appgenda.modelo.ObjContacto
 
-
 class MainActivity : AppCompatActivity() {
     private var toolbar: Toolbar? = null
     private var listaRecyclerView:RecyclerView? = null
@@ -43,6 +42,7 @@ class MainActivity : AppCompatActivity() {
         fun agregarContacto(contacto: ObjContacto){
             listaObjContactos.add(contacto)
             adaptador?.addItem(contacto)
+            adaptador?.notifyDataSetChanged()
         }
 
         fun getContactoTelPrincipal(tel1: String): ObjContacto?{
@@ -54,10 +54,14 @@ class MainActivity : AppCompatActivity() {
         }
 
         fun eliminarContactoPorTelefono(tel1: String){
+            val itemBorrar: ObjContacto?
+
             for (x:Int in 0 .. listaObjContactos.size){
                 if (listaObjContactos[x].getTelefonoPrincipal() == tel1){
-                    adaptador?.removeItem(listaObjContactos[x])
-                    listaObjContactos.remove(listaObjContactos[x])
+                    itemBorrar = listaObjContactos[x]
+                    listaObjContactos.remove(itemBorrar)
+                    adaptador?.removeItem(itemBorrar)
+                    adaptador?.notifyDataSetChanged()
                     break
                 }
             }

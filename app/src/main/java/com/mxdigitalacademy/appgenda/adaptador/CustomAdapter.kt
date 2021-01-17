@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.mxdigitalacademy.appgenda.R
+import com.mxdigitalacademy.appgenda.actividades.MainActivity
 import com.mxdigitalacademy.appgenda.modelo.ObjContacto
 import java.util.*
 import kotlin.collections.ArrayList
@@ -48,11 +49,15 @@ class CustomAdapter(items:ArrayList<ObjContacto>, var tipoVista: Int, var clickL
     }
 
     fun addItem(contacto: ObjContacto){
-        this._items?.add(contacto)
+        if (!this._items?.contains(contacto)!!)
+            this._items?.add(contacto)
+        notifyDataSetChanged()
     }
 
     fun removeItem(contacto: ObjContacto){
-        this._items?.remove(contacto)
+        if (this._items?.contains(contacto)!!)
+            this._items?.remove(contacto)
+        notifyDataSetChanged()
     }
 
     fun filter(contactos: List<ObjContacto>, filtro: String) {
