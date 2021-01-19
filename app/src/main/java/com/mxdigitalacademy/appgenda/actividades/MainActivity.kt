@@ -218,6 +218,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onCreateActionMode(p0: ActionMode?, p1: Menu?): Boolean {
+                supportActionBar?.hide()
                 actionMode = p0
                 adaptador?.iniciarActionMode()
                 menuInflater.inflate(R.menu.menu_contextual,p1!!)
@@ -231,6 +232,7 @@ class MainActivity : AppCompatActivity() {
             override fun onDestroyActionMode(p0: ActionMode?) {
                 adaptador?.destruirActionMode()
                 estadoActionMode = false
+                supportActionBar?.show()
             }
 
         }

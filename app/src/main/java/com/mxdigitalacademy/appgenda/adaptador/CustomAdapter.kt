@@ -8,7 +8,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.mxdigitalacademy.appgenda.R
-import com.mxdigitalacademy.appgenda.actividades.MainActivity
 import com.mxdigitalacademy.appgenda.modelo.ObjContacto
 import java.util.*
 import kotlin.collections.ArrayList
