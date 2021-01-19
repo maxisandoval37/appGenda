@@ -12,7 +12,6 @@ import com.mxdigitalacademy.appgenda.R
 
 class InfoContacto : AppCompatActivity() {
     private var toolbar: Toolbar? = null
-    private var telClickeado:String = ""
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_info_contacto,menu)
@@ -27,14 +26,13 @@ class InfoContacto : AppCompatActivity() {
             }
 
             R.id.editarContacto -> {
-                val intent = Intent(this, Editor::class.java)
-                intent.putExtra("nroTelefonoClick",telClickeado)
+                val intent = Intent(this, EditorContacto::class.java)
                 startActivity(intent)
                 return true
             }
 
             R.id.borrarContacto -> {
-                MainActivity.eliminarContactoPorTelefono(telClickeado)
+                MainActivity.eliminarContactoPorTelefono(MainActivity.nroTelefonoClick)
                 finish()
                 return true
             }
@@ -61,7 +59,7 @@ class InfoContacto : AppCompatActivity() {
         val tel2 = findViewById<TextView>(R.id.tvTel2)
         val email = findViewById<TextView>(R.id.tvEmail)
 
-        val contactoAux = MainActivity.getContactoTelPrincipal(telClickeado)
+        val contactoAux = MainActivity.getContactoTelPrincipal(MainActivity.nroTelefonoClick)
 
         contactoAux?.getImgAvatar()?.let { fotoAvatar.setImageResource(it) }
         nombreCompleto.text = contactoAux?.getNombreCompleto()
@@ -74,7 +72,6 @@ class InfoContacto : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_info_contacto)
 
-        telClickeado = intent.getStringExtra("nroTelefonoClick").toString()
         iniciarToolbar()
         setearInfoElemsVisuales()
     }

@@ -38,6 +38,7 @@ class MainActivity : AppCompatActivity() {
     companion object{
         var listaObjContactos: ArrayList<ObjContacto> = ArrayList()
         var adaptador: CustomAdapter? = null
+        var nroTelefonoClick: String = ""
 
         fun agregarContacto(contacto: ObjContacto){
             listaObjContactos.add(contacto)
@@ -86,7 +87,7 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
             R.id.addContact -> {
-                val intent = Intent(this, NewContact::class.java)
+                val intent = Intent(this, NuevoContacto::class.java)
                 startActivity(intent)
                 eliminarTerminosBuscados()
                 return true
@@ -170,10 +171,8 @@ class MainActivity : AppCompatActivity() {
         adaptador = CustomAdapter(listaObjContactos, tipoVista,object: ClickListener {
             override fun onClick(vista: View, index: Int) {
 
-                val nroTelefonoClick = vista.findViewById<TextView>(R.id.tvNumTelefono).text.toString()
-
+                nroTelefonoClick = vista.findViewById<TextView>(R.id.tvNumTelefono).text.toString()
                 val intent = Intent(this@MainActivity, InfoContacto::class.java)
-                intent.putExtra("nroTelefonoClick",nroTelefonoClick)
                 startActivity(intent)
 
                 eliminarTerminosBuscados()

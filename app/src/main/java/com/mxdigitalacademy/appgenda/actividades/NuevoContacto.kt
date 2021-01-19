@@ -11,7 +11,7 @@ import com.mxdigitalacademy.appgenda.R
 import com.mxdigitalacademy.appgenda.actividades.MainActivity
 import com.mxdigitalacademy.appgenda.modelo.ObjContacto
 
-class NewContact : AppCompatActivity() {
+class NuevoContacto : AppCompatActivity() {
 
     private var toolbar: Toolbar? = null
 

@@ -9,10 +9,10 @@ import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import com.mxdigitalacademy.appgenda.R
 
-class Editor : AppCompatActivity() {
+class EditorContacto : AppCompatActivity() {
 
     private var toolbar: Toolbar? = null
-    private var telClickeado = ""
+    private var telClickeado = MainActivity.nroTelefonoClick
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
@@ -63,6 +63,11 @@ class Editor : AppCompatActivity() {
         MainActivity.getContactoTelPrincipal(telClickeado)?.setEmail(email)
     }
 
+    private fun actualizarTelClickeado(tel: String){
+        telClickeado = tel
+        MainActivity.nroTelefonoClick = telClickeado
+    }
+
     private fun accionBotonGuardar(){
         val botonGuardar = findViewById<Button>(R.id.btnGuardarEditor)
 
@@ -74,15 +79,20 @@ class Editor : AppCompatActivity() {
             val email = findViewById<EditText>(R.id.etEmailEditor).text.toString()
 
             if (nombre.isNotEmpty() && apellido.isNotEmpty() && tel1.isNotEmpty() && email.isNotEmpty()){
-                if (tel2.isEmpty())
-                    tel2 = "No posee"
-                try {
-                    actualizarObjetoContacto(nombre,apellido,tel1,tel2,email)
-                    lanzarMensaje("Contacto actualizado")
-                    finish()
-                }
-                catch(e: IllegalArgumentException){
-                    lanzarMensaje(e.message.toString())
+                if (MainActivity.existeTelefonoEnAgenda(tel1) && tel1 != telClickeado)
+                        lanzarMensaje("El número $tel1, se encuentra registrado")
+                else{
+                    if (tel2.isEmpty())
+                        tel2 = "No posee"
+                    try {
+                        actualizarObjetoContacto(nombre,apellido,tel1,tel2,email)
+                        actualizarTelClickeado(tel1)
+                        lanzarMensaje("Contacto actualizado")
+                        finish()
+                    }
+                    catch(e: IllegalArgumentException){
+                        lanzarMensaje(e.message.toString())
+                    }
                 }
             }
             else
@@ -103,7 +113,6 @@ class Editor : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_editor)
 
-        telClickeado = intent.getStringExtra("nroTelefonoClick").toString()
         iniciarToolbar()
         setearInfoInputsTexts()
         accionBotonGuardar()

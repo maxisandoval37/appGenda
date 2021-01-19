@@ -9,7 +9,7 @@
         android:theme="@style/Theme.AppGenda">
 
         <activity
-            android:name=".actividades.Editor"
+            android:name=".actividades.EditorContacto"
             android:configChanges="orientation"
             android:screenOrientation="portrait"/>
 
@@ -31,7 +31,7 @@
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".actividades.NewContact"
+            android:name=".actividades.NuevoContacto"
             android:parentActivityName=".actividades.MainActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait"/>
