@@ -44,8 +44,11 @@ class SolicitudPermisos(context: Context, activity: Activity) : ActivityCompat.O
 
         if (_activity!!.shouldShowRequestPermissionRationale(Manifest.permission.CAMERA) || _activity!!.shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE))
             cargarDialogoRecomendacion()
-        else
+        else{
             ActivityCompat.requestPermissions(_activity!!, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA), 100)
+            if (!(_activity!!.shouldShowRequestPermissionRationale(Manifest.permission.CAMERA) || _activity!!.shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE)))
+                //solicitarPermisosManual()
+        }
 
         return false
     }

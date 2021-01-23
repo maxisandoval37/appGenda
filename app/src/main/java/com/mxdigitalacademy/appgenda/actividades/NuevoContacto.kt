@@ -99,6 +99,16 @@ class NuevoContacto : AppCompatActivity(){
         }
     }
 
+    private fun iniciarGestorFotos(){
+        imgMuestra = findViewById(R.id.ivFotoMuestra)
+        botonSelectFoto = findViewById(R.id.btnSeleccionarImg)
+        gestorFotos = GestorFotos(this, this@NuevoContacto, imgMuestra!!, botonSelectFoto!!)
+
+        botonSelectFoto?.setOnClickListener {
+            gestorFotos.cargarImagen()
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_contact)
