@@ -31,8 +31,28 @@ class SolicitudPermisos(context: Context, activity: Activity) : ActivityCompat.O
         onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == 100) {
             if (!(grantResults.size == 2 && grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED))
-                //solicitarPermisosManual()
+                solicitarPermisosManual()
         }
+    }
+
+    private fun solicitarPermisosManual() {
+        val opciones = arrayOf<CharSequence>("si", "no")
+        val alertOpciones = AlertDialog.Builder(_context!!)
+        alertOpciones.setTitle("¿Desea configurar los permisos de forma manual?")
+        alertOpciones.setItems(opciones) { dialogInterface, i ->
+            if (opciones[i] == "si") {
+                val intent = Intent()
+                intent.action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
+                val uri: Uri = Uri.fromParts("package", _context!!.packageName, null)
+                intent.data = uri
+                _context!!.startActivity(intent)
+            } else {
+                Toast.makeText(_context!!, "Los permisos no fueron aceptados", Toast.LENGTH_SHORT).show()
+                dialogInterface.dismiss()
+                exitProcess(0)
+            }
+        }
+        alertOpciones.show()
     }
 
     fun validaPermisos(): Boolean {
@@ -42,18 +62,19 @@ class SolicitudPermisos(context: Context, activity: Activity) : ActivityCompat.O
         if (_context!!.checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED && _context!!.checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)
             return true
 
-        if (_activity!!.shouldShowRequestPermissionRationale(Manifest.permission.CAMERA) || _activity!!.shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE))
+        if (permisosDenegados())
             cargarDialogoRecomendacion()
-        else{
+        else
             ActivityCompat.requestPermissions(_activity!!, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA), 100)
-            if (!(_activity!!.shouldShowRequestPermissionRationale(Manifest.permission.CAMERA) || _activity!!.shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE)))
-                //solicitarPermisosManual()
-        }
 
         return false
     }
 
-    private fun cargarDialogoRecomendacion() {
+    fun permisosDenegados(): Boolean{
+        return ActivityCompat.shouldShowRequestPermissionRationale(_activity!!,Manifest.permission.CAMERA) || ActivityCompat.shouldShowRequestPermissionRationale(_activity!!,Manifest.permission.WRITE_EXTERNAL_STORAGE)
+    }
+
+    fun cargarDialogoRecomendacion() {
         val dialogo = AlertDialog.Builder(_context!!)
         dialogo.setTitle("Permisos Desactivados")
         dialogo.setMessage("Debe aceptar los permisos para el correcto funcionamiento de la App")
@@ -64,4 +85,5 @@ class SolicitudPermisos(context: Context, activity: Activity) : ActivityCompat.O
         }
         dialogo.show()
     }
+
 }

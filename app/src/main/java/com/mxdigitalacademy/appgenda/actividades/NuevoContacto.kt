@@ -17,6 +17,7 @@ import androidx.appcompat.widget.Toolbar
 import com.mxdigitalacademy.appgenda.gestorFotos.GestorFotos
 import com.mxdigitalacademy.appgenda.R
 import com.mxdigitalacademy.appgenda.modelo.ObjContacto
+import com.mxdigitalacademy.appgenda.permisos.SolicitudPermisos
 
 class NuevoContacto : AppCompatActivity(){
 
@@ -102,11 +103,21 @@ class NuevoContacto : AppCompatActivity(){
     private fun iniciarGestorFotos(){
         imgMuestra = findViewById(R.id.ivFotoMuestra)
         botonSelectFoto = findViewById(R.id.btnSeleccionarImg)
+        botonSelectFoto?.isEnabled = false
         gestorFotos = GestorFotos(this, this@NuevoContacto, imgMuestra!!, botonSelectFoto!!)
+
+        comprobarPermisosFotos()
 
         botonSelectFoto?.setOnClickListener {
             gestorFotos.cargarImagen()
         }
+    }
+
+    private fun comprobarPermisosFotos(){
+        if (SolicitudPermisos(this,this@NuevoContacto).permisosDenegados())
+            SolicitudPermisos(this,this@NuevoContacto).cargarDialogoRecomendacion()
+        else
+            botonSelectFoto?.isEnabled = true
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -139,5 +150,6 @@ class NuevoContacto : AppCompatActivity(){
                 }
             }
         }
+
     }
 }
