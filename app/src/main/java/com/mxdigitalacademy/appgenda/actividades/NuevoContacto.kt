@@ -1,19 +1,29 @@
 package com.mxdigitalacademy.appgenda.actividades
 
+import android.app.Activity
+import android.content.Intent
+import android.graphics.BitmapFactory
+import android.media.MediaScannerConnection
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
+import com.mxdigitalacademy.appgenda.gestorFotos.GestorFotos
 import com.mxdigitalacademy.appgenda.R
-import com.mxdigitalacademy.appgenda.actividades.MainActivity
 import com.mxdigitalacademy.appgenda.modelo.ObjContacto
 
-class NuevoContacto : AppCompatActivity() {
+class NuevoContacto : AppCompatActivity(){
 
     private var toolbar: Toolbar? = null
+    private lateinit var gestorFotos: GestorFotos
+    private var imgMuestra: ImageView? = null
+    private var botonSelectFoto: Button? = null
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
@@ -47,10 +57,8 @@ class NuevoContacto : AppCompatActivity() {
             lanzarMensaje("Contacto guardado")
             finish()
         }
-        else{
+        else
             lanzarMensaje("El número "+contacto.getTelefonoPrincipal()+", se encuentra registrado")
-        }
-
     }
 
     private fun accionBotonGuardar(){
@@ -96,7 +104,30 @@ class NuevoContacto : AppCompatActivity() {
         setContentView(R.layout.activity_new_contact)
 
         iniciarToolbar()
+        iniciarGestorFotos()
         accionBotonGuardar()
         accionBotonCancelar()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        val pathAux = gestorFotos.getPath()
+        val codSelecciona = gestorFotos.getCodSelecciona()
+        val codFoto = gestorFotos.getCodFoto()
+
+        if (resultCode == Activity.RESULT_OK) {
+            when (requestCode) {
+                codSelecciona -> {
+                    val miPath: Uri? = data?.data
+                    imgMuestra?.setImageURI(miPath)
+                }
+                codFoto -> {
+                    MediaScannerConnection.scanFile(this, arrayOf(pathAux), null
+                    ) { path, _ -> Log.i("Ruta de almacenamiento", "Path: $path") }
+                    val bitmap = BitmapFactory.decodeFile(pathAux)
+                    imgMuestra?.setImageBitmap(bitmap)
+                }
+            }
+        }
     }
 }

@@ -7,10 +7,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.SearchView
-import android.widget.Switch
-import android.widget.TextView
-import android.widget.ViewSwitcher
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.view.ActionMode
 import androidx.appcompat.widget.Toolbar
@@ -23,6 +20,7 @@ import com.mxdigitalacademy.appgenda.adaptador.ClickListener
 import com.mxdigitalacademy.appgenda.adaptador.CustomAdapter
 import com.mxdigitalacademy.appgenda.adaptador.LongClickListener
 import com.mxdigitalacademy.appgenda.modelo.ObjContacto
+import com.mxdigitalacademy.appgenda.permisos.SolicitudPermisos
 
 class MainActivity : AppCompatActivity() {
     private var toolbar: Toolbar? = null
@@ -242,7 +240,6 @@ class MainActivity : AppCompatActivity() {
         when (item.itemId){
             R.id.ItemEliminar -> adaptador?.eliminarSeleccionados()
         }
-
     }
 
     private fun agregarContactosDePrueba(){
@@ -260,6 +257,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        SolicitudPermisos(this,this@MainActivity).iniciarSolicitud()
 
         agregarContactosDePrueba()
         iniciarToolbar()
