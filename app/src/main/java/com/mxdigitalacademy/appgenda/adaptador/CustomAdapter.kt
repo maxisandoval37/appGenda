@@ -144,10 +144,14 @@ class CustomAdapter(items:ArrayList<ObjContacto>, var tipoVista: Int, var clickL
        }
 
         fun setImagen(path: String){
-            if (Funciones.esFormatoNumerico(path))
-                this._imagen?.setImageResource(path.toInt())
-            else
-                this._imagen?.setImageURI(path.toUri())
+            if (path=="null")
+                this._imagen?.setImageResource(R.drawable.avatar_defecto)
+            else{
+                if (Funciones.esFormatoNumerico(path))
+                    this._imagen?.setImageResource(path.toInt())
+                else
+                    this._imagen?.setImageURI(path.toUri())
+            }
         }
 
         fun setNombreCompleto(nombre: String){

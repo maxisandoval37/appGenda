@@ -72,10 +72,14 @@ class InfoContacto : AppCompatActivity() {
     }
 
     private fun setearImgAvatar(fotoAvatar: ImageView, path: String) {
-        if (Funciones.esFormatoNumerico(path))
-            fotoAvatar.setImageResource(path.toInt())
-        else
-            fotoAvatar.setImageURI(path.toUri())
+        if (path=="null")
+            fotoAvatar.setImageResource(R.drawable.avatar_defecto)
+        else{
+            if (Funciones.esFormatoNumerico(path))
+                fotoAvatar.setImageResource(path.toInt())
+            else
+                fotoAvatar.setImageURI(path.toUri())
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

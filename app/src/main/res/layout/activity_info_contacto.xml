@@ -21,8 +21,8 @@
 
     <ImageView
         android:id="@+id/ivAvatar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="400dp"
+        android:layout_height="400dp"
         android:layout_marginTop="36dp"
         android:contentDescription="@string/todo"
         app:layout_constraintEnd_toEndOf="parent"
