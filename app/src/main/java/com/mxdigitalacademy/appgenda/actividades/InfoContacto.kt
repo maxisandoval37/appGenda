@@ -1,8 +1,6 @@
 package com.mxdigitalacademy.appgenda.actividades
 
 import android.content.Intent
-import android.graphics.BitmapFactory
-import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
