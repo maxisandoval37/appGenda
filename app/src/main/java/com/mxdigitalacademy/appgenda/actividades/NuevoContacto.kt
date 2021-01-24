@@ -25,6 +25,7 @@ class NuevoContacto : AppCompatActivity(){
     private lateinit var gestorFotos: GestorFotos
     private var imgMuestra: ImageView? = null
     private var botonSelectFoto: Button? = null
+    private var pathIMG: Uri? = null
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
@@ -78,8 +79,7 @@ class NuevoContacto : AppCompatActivity(){
 
                 try {
                     ObjContacto.datosValidos(nombre,apellido,tel1,tel2,email)
-                    val contacto = ObjContacto(R.drawable.ic_launcher_foreground, nombre, apellido, tel1, tel2, email)
-
+                    val contacto = ObjContacto(pathIMG.toString(), nombre, apellido, tel1, tel2, email)
                     agregarContactoEnAgenda(contacto)
                 }
                 catch(e: IllegalArgumentException){
@@ -139,8 +139,8 @@ class NuevoContacto : AppCompatActivity(){
         if (resultCode == Activity.RESULT_OK) {
             when (requestCode) {
                 codSelecciona -> {
-                    val miPath: Uri? = data?.data
-                    imgMuestra?.setImageURI(miPath)
+                    this.pathIMG = data?.data
+                    imgMuestra?.setImageURI(pathIMG)
                 }
                 codFoto -> {
                     MediaScannerConnection.scanFile(this, arrayOf(pathAux), null

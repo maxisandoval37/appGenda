@@ -57,7 +57,7 @@ class MainActivity : AppCompatActivity() {
 
             for (x:Int in 0 .. listaObjContactos.size){
                 if (listaObjContactos[x].getTelefonoPrincipal() == tel1){
-                    itemBorrar = listaObjContactos[x]
+                    itemBorrar= listaObjContactos[x]
                     listaObjContactos.remove(itemBorrar)
                     adaptador?.removeItem(itemBorrar)
                     adaptador?.notifyDataSetChanged()
@@ -244,13 +244,13 @@ class MainActivity : AppCompatActivity() {
 
     private fun agregarContactosDePrueba(){
         if (listaObjContactos.isEmpty()){
-            listaObjContactos.add(ObjContacto(R.drawable.walter_white, "Walter", "White", "3478598723", "", "ww@bb.com"))
-            listaObjContactos.add(ObjContacto(R.drawable.jesse_pinkman, "Jesse", "Pinkman", "112783498", "2734892893", "jesseP@gmail.com"))
-            listaObjContactos.add(ObjContacto(R.drawable.gus_fring, "Gus", "Fring", "1132456745", "", "fring@gmail.com"))
-            listaObjContactos.add(ObjContacto(R.drawable.walter_white, "Walter", "Fake", "312398723", "23423434", "fake@kk.com"))
-            listaObjContactos.add(ObjContacto(R.drawable.mike_ehrmantraut, "Mike", "Ehrmantraut", "113422444", "1163246952", "mikeE2021@email.com"))
-            listaObjContactos.add(ObjContacto(R.drawable.saul_goodman, "Saul", "Goodman", "45312344", "23423412", "better_call_saul@email.com"))
-            listaObjContactos.add(ObjContacto(R.drawable.lydia_rodarte, "Lydia", "Rodarte", "56245784", "43523421", "Rodarte@box.com"))
+            listaObjContactos.add(ObjContacto(R.drawable.walter_white.toString(), "Walter", "White", "3478598723", "", "ww@bb.com"))
+            listaObjContactos.add(ObjContacto(R.drawable.jesse_pinkman.toString(), "Jesse", "Pinkman", "112783498", "2734892893", "jesseP@gmail.com"))
+            listaObjContactos.add(ObjContacto(R.drawable.gus_fring.toString(), "Gus", "Fring", "1132456745", "", "fring@gmail.com"))
+            listaObjContactos.add(ObjContacto(R.drawable.walter_white.toString(), "Walter", "Fake", "312398723", "23423434", "fake@kk.com"))
+            listaObjContactos.add(ObjContacto(R.drawable.mike_ehrmantraut.toString(), "Mike", "Ehrmantraut", "113422444", "1163246952", "mikeE2021@email.com"))
+            listaObjContactos.add(ObjContacto(R.drawable.saul_goodman.toString(), "Saul", "Goodman", "45312344", "23423412", "better_call_saul@email.com"))
+            listaObjContactos.add(ObjContacto(R.drawable.lydia_rodarte.toString(), "Lydia", "Rodarte", "56245784", "43523421", "Rodarte@box.com"))
         }
     }
 

@@ -1,6 +1,8 @@
 package com.mxdigitalacademy.appgenda.actividades
 
 import android.content.Intent
+import android.graphics.BitmapFactory
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -8,7 +10,9 @@ import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
+import androidx.core.net.toUri
 import com.mxdigitalacademy.appgenda.R
+import com.mxdigitalacademy.appgenda.funciones.Funciones
 
 class InfoContacto : AppCompatActivity() {
     private var toolbar: Toolbar? = null
@@ -61,11 +65,19 @@ class InfoContacto : AppCompatActivity() {
 
         val contactoAux = MainActivity.getContactoTelPrincipal(MainActivity.nroTelefonoClick)
 
-        contactoAux?.getImgAvatar()?.let { fotoAvatar.setImageResource(it) }
+        setearImgAvatar(fotoAvatar, contactoAux?.getImgAvatar().toString())
+
         nombreCompleto.text = contactoAux?.getNombreCompleto()
         tel1.text = contactoAux?.getTelefonoPrincipal()
         tel2.text = contactoAux?.getTelefonoSecundario()
         email.text = contactoAux?.getEmail()
+    }
+
+    private fun setearImgAvatar(fotoAvatar: ImageView, path: String) {
+        if (Funciones.esFormatoNumerico(path))
+            fotoAvatar.setImageResource(path.toInt())
+        else
+            fotoAvatar.setImageURI(path.toUri())
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

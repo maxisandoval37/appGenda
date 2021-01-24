@@ -6,8 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
 import com.mxdigitalacademy.appgenda.R
+import com.mxdigitalacademy.appgenda.funciones.Funciones
 import com.mxdigitalacademy.appgenda.modelo.ObjContacto
 import java.util.*
 import kotlin.collections.ArrayList
@@ -141,8 +143,11 @@ class CustomAdapter(items:ArrayList<ObjContacto>, var tipoVista: Int, var clickL
             this._telefono = this._vista.findViewById(R.id.tvNumTelefono)
        }
 
-        fun setImagen(imagen: Int){
-            this._imagen?.setImageResource(imagen)
+        fun setImagen(path: String){
+            if (Funciones.esFormatoNumerico(path))
+                this._imagen?.setImageResource(path.toInt())
+            else
+                this._imagen?.setImageURI(path.toUri())
         }
 
         fun setNombreCompleto(nombre: String){
