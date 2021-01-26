@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     tools:context=".actividades.InfoContacto">
 
     <androidx.appcompat.widget.Toolbar
@@ -21,7 +22,7 @@
 
     <ImageView
         android:id="@+id/ivAvatar"
-        android:layout_width="400dp"
+        android:layout_width="wrap_content"
         android:layout_height="400dp"
         android:layout_marginTop="36dp"
         android:contentDescription="@string/todo"

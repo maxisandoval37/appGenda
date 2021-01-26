@@ -8,93 +8,94 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
-        app:titleTextColor="?android:attr/textColorPrimaryInverse"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
-        android:elevation="4dp" android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:popupTheme="@style/Theme.AppCompat.Light"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.000"/>
+        app:layout_constraintVertical_bias="0.000"
+        app:popupTheme="@style/Theme.AppCompat.Light"
+        app:titleTextColor="?android:attr/textColorPrimaryInverse" />
 
     <EditText
         android:id="@+id/etNombreEditor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="120dp"
+        android:autofillHints="@string/nombre"
         android:ems="10"
         android:inputType="textPersonName"
+        android:labelFor="@+id/etNombreEditor"
         android:text="@string/nombre"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/toolbar"
-        android:autofillHints="@string/nombre"
-        android:labelFor="@+id/etNombreEditor" />
+        app:layout_constraintTop_toTopOf="@+id/toolbar" />
 
     <EditText
         android:id="@+id/etApellidoEditor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
+        android:autofillHints="@string/apellido"
         android:ems="10"
         android:inputType="textPersonName"
+        android:labelFor="@+id/etApellidoEditor"
         android:text="@string/apellido"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etNombreEditor"
-        android:autofillHints="@string/apellido"
-        android:labelFor="@+id/etApellidoEditor"/>
+        app:layout_constraintTop_toBottomOf="@+id/etNombreEditor" />
 
     <EditText
         android:id="@+id/etTelPrincipalEditor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
+        android:autofillHints="@string/tel_fono_principal"
         android:ems="10"
         android:inputType="phone"
+        android:labelFor="@+id/etTelPrincipalEditor"
         android:text="@string/tel_fono_principal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etApellidoEditor"
-        android:autofillHints="@string/tel_fono_principal"
-        android:labelFor="@+id/etTelPrincipalEditor"/>
+        app:layout_constraintTop_toBottomOf="@+id/etApellidoEditor" />
 
     <EditText
         android:id="@+id/etTelSecundarioEditor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
+        android:autofillHints="@string/tel_fono_secundario"
         android:ems="10"
-        android:text="@string/tel_fono_secundario"
         android:inputType="phone"
+        android:labelFor="@+id/etTelSecundarioEditor"
+        android:text="@string/tel_fono_secundario"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etTelPrincipalEditor"
-        android:autofillHints="@string/tel_fono_secundario"
-        android:labelFor="@+id/etTelSecundarioEditor"/>
+        app:layout_constraintTop_toBottomOf="@+id/etTelPrincipalEditor" />
 
     <EditText
         android:id="@+id/etEmailEditor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
+        android:autofillHints="@string/e_mail"
         android:ems="10"
-        android:text="@string/e_mail"
         android:inputType="textEmailAddress"
+        android:labelFor="@+id/etEmailEditor"
+        android:text="@string/e_mail"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etTelSecundarioEditor"
-        app:layout_constraintVertical_bias="0.054"
-        android:autofillHints="@string/e_mail"
-        android:labelFor="@+id/etEmailEditor"/>
+        app:layout_constraintVertical_bias="0.054" />
 
     <Button
         android:id="@+id/btnGuardarEditor"
