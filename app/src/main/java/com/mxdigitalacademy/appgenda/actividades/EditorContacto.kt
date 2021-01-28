@@ -1,18 +1,25 @@
 package com.mxdigitalacademy.appgenda.actividades
 
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import com.mxdigitalacademy.appgenda.R
+import com.mxdigitalacademy.appgenda.gestorFotos.GestorFotos
 
 class EditorContacto : AppCompatActivity() {
 
     private var toolbar: Toolbar? = null
     private var telClickeado = MainActivity.nroTelefonoClick
+    private lateinit var gestorFotos: GestorFotos
+    private var imgMuestra: ImageView? = null
+    private var botonSelectFoto: Button? = null
+    private var pathIMG: Uri? = null
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
@@ -37,12 +44,14 @@ class EditorContacto : AppCompatActivity() {
     }
 
     private fun setearInfoInputsTexts(){
+        val fotoAvatar = findViewById<ImageView>(R.id.ivFotoMuestraEdit)
         val nombreEditor = findViewById<EditText>(R.id.etNombreEditor)
         val apellidoEditor = findViewById<EditText>(R.id.etApellidoEditor)
         val tel1Editor = findViewById<EditText>(R.id.etTelPrincipalEditor)
         val tel2Editor = findViewById<EditText>(R.id.etTelSecundarioEditor)
         val emailEditor = findViewById<EditText>(R.id.etEmailEditor)
 
+        //fotoAvatar.setImageResource(MainActivity.getContactoTelPrincipal(telClickeado)?.getImgAvatar().toInt())
         nombreEditor.setText(MainActivity.getContactoTelPrincipal(telClickeado)?.getNombre())
         apellidoEditor.setText(MainActivity.getContactoTelPrincipal(telClickeado)?.getApellido())
         tel1Editor.setText(MainActivity.getContactoTelPrincipal(telClickeado)?.getTelefonoPrincipal())

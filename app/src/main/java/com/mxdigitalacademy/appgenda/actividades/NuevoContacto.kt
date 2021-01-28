@@ -101,15 +101,15 @@ class NuevoContacto : AppCompatActivity(){
     }
 
     private fun iniciarGestorFotos(){
-        imgMuestra = findViewById(R.id.ivFotoMuestra)
-        botonSelectFoto = findViewById(R.id.btnSeleccionarImg)
-        botonSelectFoto?.isEnabled = false
-        gestorFotos = GestorFotos(this, this@NuevoContacto, imgMuestra!!, botonSelectFoto!!)
+        this.imgMuestra = findViewById(R.id.ivFotoMuestra)
+        this.botonSelectFoto = findViewById(R.id.btnSeleccionarImg)
+        this.botonSelectFoto?.isEnabled = false
+        this.gestorFotos = GestorFotos(this, this@NuevoContacto, this.imgMuestra!!, this.botonSelectFoto!!)
 
         comprobarPermisosFotos()
 
-        botonSelectFoto?.setOnClickListener {
-            gestorFotos.cargarImagen()
+        this.botonSelectFoto?.setOnClickListener {
+            this.gestorFotos.cargarImagen()
         }
     }
 
@@ -117,7 +117,7 @@ class NuevoContacto : AppCompatActivity(){
         if (SolicitudPermisos(this,this@NuevoContacto).permisosDenegados())
             SolicitudPermisos(this,this@NuevoContacto).cargarDialogoRecomendacion()
         else
-            botonSelectFoto?.isEnabled = true
+            this.botonSelectFoto?.isEnabled = true
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -140,13 +140,13 @@ class NuevoContacto : AppCompatActivity(){
             when (requestCode) {
                 codSelecciona -> {
                     this.pathIMG = data?.data
-                    imgMuestra?.setImageURI(pathIMG)
+                    this.imgMuestra?.setImageURI(this.pathIMG)
                 }
                 codFoto -> {
                     MediaScannerConnection.scanFile(this, arrayOf(pathAux), null
                     ) { path, _ -> Log.i("Ruta de almacenamiento", "Path: $path") }
                     val bitmap = BitmapFactory.decodeFile(pathAux)
-                    imgMuestra?.setImageBitmap(bitmap)
+                    this.imgMuestra?.setImageBitmap(bitmap)
                 }
             }
         }

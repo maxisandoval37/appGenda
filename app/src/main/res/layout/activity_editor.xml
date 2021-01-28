@@ -20,6 +20,30 @@
         app:popupTheme="@style/Theme.AppCompat.Light"
         app:titleTextColor="?android:attr/textColorPrimaryInverse" />
 
+    <ImageView
+        android:id="@+id/ivFotoMuestraEdit"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_marginTop="56dp"
+        android:contentDescription="@string/todo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/avatar_defecto" />
+
+    <Button
+        android:id="@+id/btnSeleccionarImgEdit"
+        android:layout_width="40dp"
+        android:layout_height="33dp"
+        android:layout_marginTop="160dp"
+        android:layout_marginEnd="4dp"
+        android:background="@android:drawable/ic_menu_edit"
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <EditText
         android:id="@+id/etNombreEditor"
         android:layout_width="wrap_content"
