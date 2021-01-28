@@ -12,6 +12,9 @@ import android.os.Environment
 import java.io.File
 import android.content.Context
 import androidx.core.content.FileProvider
+import androidx.core.net.toUri
+import com.mxdigitalacademy.appgenda.R
+import com.mxdigitalacademy.appgenda.funciones.Funciones
 
 class GestorFotos (context: Context, activity: Activity, img: ImageView, btn: Button){
 
@@ -27,6 +30,19 @@ class GestorFotos (context: Context, activity: Activity, img: ImageView, btn: Bu
 
     private var _context: Context? = null
     private var _activity: Activity? = null
+
+    companion object{
+        fun setearImgView(iv: ImageView, path: String, imgDefecto: Int) {
+            if (path=="null")
+                iv.setImageResource(imgDefecto)
+            else{
+                if (Funciones.esFormatoNumerico(path))
+                    iv.setImageResource(path.toInt())
+                else
+                    iv.setImageURI(path.toUri())
+            }
+        }
+    }
 
     init {
         this._imagen = img

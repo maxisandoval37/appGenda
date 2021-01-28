@@ -1,8 +1,13 @@
 package com.mxdigitalacademy.appgenda.actividades
 
+import android.app.Activity
+import android.content.Intent
+import android.graphics.BitmapFactory
+import android.media.MediaScannerConnection
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.widget.Button
 import android.widget.EditText
@@ -11,6 +16,7 @@ import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import com.mxdigitalacademy.appgenda.R
 import com.mxdigitalacademy.appgenda.gestorFotos.GestorFotos
+import com.mxdigitalacademy.appgenda.permisos.SolicitudPermisos
 
 class EditorContacto : AppCompatActivity() {
 
@@ -44,14 +50,13 @@ class EditorContacto : AppCompatActivity() {
     }
 
     private fun setearInfoInputsTexts(){
-        val fotoAvatar = findViewById<ImageView>(R.id.ivFotoMuestraEdit)
         val nombreEditor = findViewById<EditText>(R.id.etNombreEditor)
         val apellidoEditor = findViewById<EditText>(R.id.etApellidoEditor)
         val tel1Editor = findViewById<EditText>(R.id.etTelPrincipalEditor)
         val tel2Editor = findViewById<EditText>(R.id.etTelSecundarioEditor)
         val emailEditor = findViewById<EditText>(R.id.etEmailEditor)
 
-        //fotoAvatar.setImageResource(MainActivity.getContactoTelPrincipal(telClickeado)?.getImgAvatar().toInt())
+        GestorFotos.setearImgView(this.imgMuestra!!, MainActivity.getContactoTelPrincipal(telClickeado)?.getImgAvatar().toString(),R.drawable.avatar_defecto)
         nombreEditor.setText(MainActivity.getContactoTelPrincipal(telClickeado)?.getNombre())
         apellidoEditor.setText(MainActivity.getContactoTelPrincipal(telClickeado)?.getApellido())
         tel1Editor.setText(MainActivity.getContactoTelPrincipal(telClickeado)?.getTelefonoPrincipal())
@@ -63,8 +68,8 @@ class EditorContacto : AppCompatActivity() {
         Toast.makeText(this,mensaje,Toast.LENGTH_SHORT).show()
     }
 
-    private fun actualizarObjetoContacto(nombre: String, apellido: String, tel1: String, tel2: String, email: String){
-        //MainActivity.getContactoTelPrincipal(telClickeado)?.setImgAvatar(0)
+    private fun actualizarObjetoContacto(fotoAvatar: String,nombre: String, apellido: String, tel1: String, tel2: String, email: String){
+        MainActivity.getContactoTelPrincipal(telClickeado)?.setImgAvatar(fotoAvatar)
         MainActivity.getContactoTelPrincipal(telClickeado)?.setNombre(nombre)
         MainActivity.getContactoTelPrincipal(telClickeado)?.setApellido(apellido)
         MainActivity.getContactoTelPrincipal(telClickeado)?.setTelPrincipal(tel1)
@@ -94,7 +99,7 @@ class EditorContacto : AppCompatActivity() {
                     if (tel2.isEmpty())
                         tel2 = "No posee"
                     try {
-                        actualizarObjetoContacto(nombre,apellido,tel1,tel2,email)
+                        actualizarObjetoContacto(detectarCambiosAvatar(),nombre,apellido,tel1,tel2,email)
                         actualizarTelClickeado(tel1)
                         lanzarMensaje("Contacto actualizado")
                         finish()
@@ -107,6 +112,32 @@ class EditorContacto : AppCompatActivity() {
             else
                 lanzarMensaje("Complete los campos restantes para continuar")
         }
+    }
+
+    private fun detectarCambiosAvatar(): String{
+        if (this.pathIMG == null)
+            return MainActivity.getContactoTelPrincipal(telClickeado)?.getImgAvatar().toString()
+        return pathIMG.toString()
+    }
+
+    private fun iniciarGestorFotos(){
+        this.imgMuestra = findViewById(R.id.ivFotoMuestraEdit)
+        this.botonSelectFoto = findViewById(R.id.btnSeleccionarImgEdit)
+        this.botonSelectFoto?.isEnabled = false
+        this.gestorFotos = GestorFotos(this, this@EditorContacto, this.imgMuestra!!, this.botonSelectFoto!!)
+
+        comprobarPermisosFotos()
+
+        this.botonSelectFoto?.setOnClickListener {
+            this.gestorFotos.cargarImagen()
+        }
+    }
+
+    private fun comprobarPermisosFotos(){
+        if (SolicitudPermisos(this,this@EditorContacto).permisosDenegados())
+            SolicitudPermisos(this,this@EditorContacto).cargarDialogoRecomendacion()
+        else
+            this.botonSelectFoto?.isEnabled = true
     }
 
     private fun accionBotonCancelar(){
@@ -123,8 +154,32 @@ class EditorContacto : AppCompatActivity() {
         setContentView(R.layout.activity_editor)
 
         iniciarToolbar()
+        iniciarGestorFotos()
         setearInfoInputsTexts()
         accionBotonGuardar()
         accionBotonCancelar()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        val pathAux = gestorFotos.getPath()
+        val codSelecciona = gestorFotos.getCodSelecciona()
+        val codFoto = gestorFotos.getCodFoto()
+
+        if (resultCode == Activity.RESULT_OK) {
+            when (requestCode) {
+                codSelecciona -> {
+                    this.pathIMG = data?.data
+                    this.imgMuestra?.setImageURI(this.pathIMG)
+                }
+                codFoto -> {
+                    MediaScannerConnection.scanFile(this, arrayOf(pathAux), null
+                    ) { path, _ -> Log.i("Ruta de almacenamiento", "Path: $path") }
+                    val bitmap = BitmapFactory.decodeFile(pathAux)
+                    this.imgMuestra?.setImageBitmap(bitmap)
+                }
+            }
+        }
+
     }
 }

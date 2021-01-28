@@ -11,6 +11,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.net.toUri
 import com.mxdigitalacademy.appgenda.R
 import com.mxdigitalacademy.appgenda.funciones.Funciones
+import com.mxdigitalacademy.appgenda.gestorFotos.GestorFotos
 
 class InfoContacto : AppCompatActivity() {
     private var toolbar: Toolbar? = null
@@ -63,23 +64,12 @@ class InfoContacto : AppCompatActivity() {
 
         val contactoAux = MainActivity.getContactoTelPrincipal(MainActivity.nroTelefonoClick)
 
-        setearImgAvatar(fotoAvatar, contactoAux?.getImgAvatar().toString())
+        GestorFotos.setearImgView(fotoAvatar, contactoAux?.getImgAvatar().toString(),R.drawable.avatar_defecto)
 
         nombreCompleto.text = contactoAux?.getNombreCompleto()
         tel1.text = contactoAux?.getTelefonoPrincipal()
         tel2.text = contactoAux?.getTelefonoSecundario()
         email.text = contactoAux?.getEmail()
-    }
-
-    private fun setearImgAvatar(fotoAvatar: ImageView, path: String) {
-        if (path=="null")
-            fotoAvatar.setImageResource(R.drawable.avatar_defecto)
-        else{
-            if (Funciones.esFormatoNumerico(path))
-                fotoAvatar.setImageResource(path.toInt())
-            else
-                fotoAvatar.setImageURI(path.toUri())
-        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
