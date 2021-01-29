@@ -121,8 +121,8 @@ class EditorContacto : AppCompatActivity() {
     }
 
     private fun iniciarGestorFotos(){
-        this.imgMuestra = findViewById(R.id.ivFotoMuestraEdit)
-        this.botonSelectFoto = findViewById(R.id.btnSeleccionarImgEdit)
+        this.imgMuestra = findViewById(R.id.ivFotoMuestraEditor)
+        this.botonSelectFoto = findViewById(R.id.btnSeleccionarImgEditor)
         this.botonSelectFoto?.isEnabled = false
         this.gestorFotos = GestorFotos(this, this@EditorContacto, this.imgMuestra!!, this.botonSelectFoto!!)
 
