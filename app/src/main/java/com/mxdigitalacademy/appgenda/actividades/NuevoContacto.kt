@@ -143,8 +143,8 @@ class NuevoContacto : AppCompatActivity(){
                     this.imgMuestra?.setImageURI(this.pathIMG)
                 }
                 codFoto -> {
-                    MediaScannerConnection.scanFile(this, arrayOf(pathAux), null
-                    ) { path, _ -> Log.i("Ruta de almacenamiento", "Path: $path") }
+                    MediaScannerConnection.scanFile(this, arrayOf(pathAux), null)
+                    { path, _ -> Log.i("Ruta de almacenamiento", "Path: $path") }
                     val bitmap = BitmapFactory.decodeFile(pathAux)
                     this.imgMuestra?.setImageBitmap(bitmap)
                 }

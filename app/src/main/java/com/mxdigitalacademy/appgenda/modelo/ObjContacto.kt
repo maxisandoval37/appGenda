@@ -25,7 +25,7 @@ class ObjContacto(imgAvatar: String, nombre: String, apellido: String, telefonoP
                 apellido.length >10 -> throw IllegalArgumentException("El Apellido no puede tener más de 10 caracteres")
                 tel1.length >10 -> throw IllegalArgumentException("El 1° Teléfono no puede tener más de 10 digitos")
                 tel2.length >10 -> throw IllegalArgumentException("El 2° Teléfono no puede tener más de 10 digitos")
-                email.length > 15 -> throw IllegalArgumentException("El Email no puede tener más de 15 caracteres")
+                email.length >30 -> throw IllegalArgumentException("El Email no puede tener más de 30 caracteres")
             }
             return true
         }
@@ -95,9 +95,9 @@ class ObjContacto(imgAvatar: String, nombre: String, apellido: String, telefonoP
     }
 
     fun setEmail(email: String){
-        if (email.length <= 15)
+        if (email.length <= 30)
             this._email = email
         else
-            throw IllegalArgumentException("El Email no puede tener más de 15 caracteres")
+            throw IllegalArgumentException("El Email no puede tener más de 30 caracteres")
     }
 }
