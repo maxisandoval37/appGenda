@@ -3,17 +3,16 @@ package com.mxdigitalacademy.appgenda.actividades
 import android.app.Activity
 import android.content.Intent
 import android.graphics.BitmapFactory
-import android.media.MediaScannerConnection
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
+import androidx.core.net.toUri
 import com.mxdigitalacademy.appgenda.R
 import com.mxdigitalacademy.appgenda.gestorFotos.GestorFotos
 import com.mxdigitalacademy.appgenda.permisos.SolicitudPermisos
@@ -120,11 +119,14 @@ class EditorContacto : AppCompatActivity() {
         return pathIMG.toString()
     }
 
-    private fun iniciarGestorFotos(){
+    private fun inicializarElemsGraficos(){
         this.imgMuestra = findViewById(R.id.ivFotoMuestraEditor)
         this.botonSelectFoto = findViewById(R.id.btnSeleccionarImgEditor)
+    }
+
+    private fun iniciarGestorFotos(){
         this.botonSelectFoto?.isEnabled = false
-        this.gestorFotos = GestorFotos(this, this@EditorContacto, this.imgMuestra!!, this.botonSelectFoto!!)
+        this.gestorFotos = GestorFotos(this, this@EditorContacto)
 
         comprobarPermisosFotos()
 
@@ -154,6 +156,7 @@ class EditorContacto : AppCompatActivity() {
         setContentView(R.layout.activity_editor)
 
         iniciarToolbar()
+        inicializarElemsGraficos()
         iniciarGestorFotos()
         setearInfoInputsTexts()
         accionBotonGuardar()
@@ -162,24 +165,22 @@ class EditorContacto : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        val pathAux = gestorFotos.getPath()
         val codSelecciona = gestorFotos.getCodSelecciona()
         val codFoto = gestorFotos.getCodFoto()
+        this.pathIMG = gestorFotos.getPath()?.toUri()
 
         if (resultCode == Activity.RESULT_OK) {
             when (requestCode) {
                 codSelecciona -> {
                     this.pathIMG = data?.data
-                    this.imgMuestra?.setImageURI(this.pathIMG)
+                    this.imgMuestra?.setImageURI(data?.data)
                 }
                 codFoto -> {
-                    MediaScannerConnection.scanFile(this, arrayOf(pathAux), null
-                    ) { path, _ -> Log.i("Ruta de almacenamiento", "Path: $path") }
-                    val bitmap = BitmapFactory.decodeFile(pathAux)
+                    val bitmap = BitmapFactory.decodeFile(pathIMG.toString())
                     this.imgMuestra?.setImageBitmap(bitmap)
+                    MainActivity.getContactoTelPrincipal(telClickeado)?.setImgAvatar(pathIMG.toString())
                 }
             }
         }
-
     }
 }

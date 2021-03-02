@@ -5,7 +5,6 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.provider.MediaStore
-import android.widget.Button
 import android.widget.ImageView
 import android.app.AlertDialog.Builder
 import android.os.Environment
@@ -13,19 +12,15 @@ import java.io.File
 import android.content.Context
 import androidx.core.content.FileProvider
 import androidx.core.net.toUri
-import com.mxdigitalacademy.appgenda.R
 import com.mxdigitalacademy.appgenda.funciones.Funciones
 
-class GestorFotos (context: Context, activity: Activity, img: ImageView, btn: Button){
+class GestorFotos (context: Context, activity: Activity){
 
-    private val carpetaRaiz = "misImagenesPrueba/"
-    private val rutaImagen = carpetaRaiz + "misFotosAppGenda"
+    private val rutaImagen = "misFotos/AppGenda"
 
     private val _codSelecciona = 10
     private val _codFoto = 20
 
-    private var _imagen: ImageView? = null
-    private var _botonCargar: Button? = null
     private var _path: String? = null
 
     private var _context: Context? = null
@@ -45,8 +40,6 @@ class GestorFotos (context: Context, activity: Activity, img: ImageView, btn: Bu
     }
 
     init {
-        this._imagen = img
-        this._botonCargar = btn
         this._context = context
         this._activity = activity
     }

@@ -3,17 +3,16 @@ package com.mxdigitalacademy.appgenda.actividades
 import android.app.Activity
 import android.content.Intent
 import android.graphics.BitmapFactory
-import android.media.MediaScannerConnection
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
+import androidx.core.net.toUri
 import com.mxdigitalacademy.appgenda.gestorFotos.GestorFotos
 import com.mxdigitalacademy.appgenda.R
 import com.mxdigitalacademy.appgenda.modelo.ObjContacto
@@ -100,11 +99,14 @@ class NuevoContacto : AppCompatActivity(){
         }
     }
 
-    private fun iniciarGestorFotos(){
+    private fun inicializarElemsGraficos(){
         this.imgMuestra = findViewById(R.id.ivFotoMuestra)
         this.botonSelectFoto = findViewById(R.id.btnSeleccionarImg)
+    }
+
+    private fun iniciarGestorFotos(){
         this.botonSelectFoto?.isEnabled = false
-        this.gestorFotos = GestorFotos(this, this@NuevoContacto, this.imgMuestra!!, this.botonSelectFoto!!)
+        this.gestorFotos = GestorFotos(this, this@NuevoContacto)
 
         comprobarPermisosFotos()
 
@@ -125,6 +127,7 @@ class NuevoContacto : AppCompatActivity(){
         setContentView(R.layout.activity_new_contact)
 
         iniciarToolbar()
+        inicializarElemsGraficos()
         iniciarGestorFotos()
         accionBotonGuardar()
         accionBotonCancelar()
@@ -132,24 +135,21 @@ class NuevoContacto : AppCompatActivity(){
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        val pathAux = gestorFotos.getPath()
         val codSelecciona = gestorFotos.getCodSelecciona()
         val codFoto = gestorFotos.getCodFoto()
+        this.pathIMG = gestorFotos.getPath()?.toUri()
 
         if (resultCode == Activity.RESULT_OK) {
             when (requestCode) {
                 codSelecciona -> {
                     this.pathIMG = data?.data
-                    this.imgMuestra?.setImageURI(this.pathIMG)
+                    this.imgMuestra?.setImageURI(data?.data)
                 }
                 codFoto -> {
-                    MediaScannerConnection.scanFile(this, arrayOf(pathAux), null)
-                    { path, _ -> Log.i("Ruta de almacenamiento", "Path: $path") }
-                    val bitmap = BitmapFactory.decodeFile(pathAux)
+                    val bitmap = BitmapFactory.decodeFile(pathIMG.toString())
                     this.imgMuestra?.setImageBitmap(bitmap)
                 }
             }
         }
-
     }
 }
