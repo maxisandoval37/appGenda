@@ -13,18 +13,12 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import kotlin.system.exitProcess
 
-class SolicitudPermisos(context: Context, activity: Activity) : ActivityCompat.OnRequestPermissionsResultCallback{
+class SolicitudPermisos(activity: Activity) : ActivityCompat.OnRequestPermissionsResultCallback{
 
-    private var _context: Context? = null
     private var _activity: Activity? = null
 
     init {
-        this._context = context
         this._activity = activity
-    }
-
-    fun iniciarSolicitud(){
-        validaPermisos()
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
@@ -37,17 +31,17 @@ class SolicitudPermisos(context: Context, activity: Activity) : ActivityCompat.O
 
     private fun solicitarPermisosManual() {
         val opciones = arrayOf<CharSequence>("si", "no")
-        val alertOpciones = AlertDialog.Builder(_context!!)
+        val alertOpciones = AlertDialog.Builder(_activity?.applicationContext)
         alertOpciones.setTitle("¿Desea configurar los permisos de forma manual?")
         alertOpciones.setItems(opciones) { dialogInterface, i ->
             if (opciones[i] == "si") {
                 val intent = Intent()
                 intent.action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
-                val uri: Uri = Uri.fromParts("package", _context!!.packageName, null)
+                val uri: Uri = Uri.fromParts("package", _activity?.applicationContext?.packageName, null)
                 intent.data = uri
-                _context!!.startActivity(intent)
+                _activity?.applicationContext?.startActivity(intent)
             } else {
-                Toast.makeText(_context!!, "Los permisos no fueron aceptados", Toast.LENGTH_SHORT).show()
+                Toast.makeText(_activity?.applicationContext, "Los permisos no fueron aceptados", Toast.LENGTH_SHORT).show()
                 dialogInterface.dismiss()
                 exitProcess(0)
             }
@@ -55,11 +49,12 @@ class SolicitudPermisos(context: Context, activity: Activity) : ActivityCompat.O
         alertOpciones.show()
     }
 
-    fun validaPermisos(): Boolean {
+    fun validarPermisos(): Boolean {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M)
             return true
 
-        if (_context!!.checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED && _context!!.checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)
+        if (_activity?.applicationContext?.checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED &&
+            _activity?.applicationContext?.checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)
             return true
 
         if (permisosDenegados())
@@ -75,7 +70,7 @@ class SolicitudPermisos(context: Context, activity: Activity) : ActivityCompat.O
     }
 
     fun cargarDialogoRecomendacion() {
-        val dialogo = AlertDialog.Builder(_context!!)
+        val dialogo = AlertDialog.Builder(_activity?.applicationContext)
         dialogo.setTitle("Permisos Desactivados")
         dialogo.setMessage("Debe aceptar los permisos para el correcto funcionamiento de la App")
         dialogo.setPositiveButton("Aceptar") { _, _ ->

@@ -116,8 +116,8 @@ class NuevoContacto : AppCompatActivity(){
     }
 
     private fun comprobarPermisosFotos(){
-        if (SolicitudPermisos(this,this@NuevoContacto).permisosDenegados())
-            SolicitudPermisos(this,this@NuevoContacto).cargarDialogoRecomendacion()
+        if (SolicitudPermisos(this).permisosDenegados())
+            SolicitudPermisos(this).cargarDialogoRecomendacion()
         else
             this.botonSelectFoto?.isEnabled = true
     }

@@ -239,7 +239,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        SolicitudPermisos(this,this@MainActivity).iniciarSolicitud()
+        SolicitudPermisos(this).validarPermisos()
         Funciones.agregarContactosDePrueba(listaObjContactos)
         iniciarToolbar()
         inicializarListaRecyclerView(R.layout.template_contacto)

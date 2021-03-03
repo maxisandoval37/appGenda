@@ -136,8 +136,8 @@ class EditorContacto : AppCompatActivity() {
     }
 
     private fun comprobarPermisosFotos(){
-        if (SolicitudPermisos(this,this@EditorContacto).permisosDenegados())
-            SolicitudPermisos(this,this@EditorContacto).cargarDialogoRecomendacion()
+        if (SolicitudPermisos(this).permisosDenegados())
+            SolicitudPermisos(this).cargarDialogoRecomendacion()
         else
             this.botonSelectFoto?.isEnabled = true
     }
