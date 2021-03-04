@@ -67,11 +67,11 @@ class SolicitudPermisos(context: Context, activity: Activity) : ActivityCompat.O
         return false
     }
 
-    fun permisosDenegados(): Boolean{
+    private fun permisosDenegados(): Boolean{
         return ActivityCompat.shouldShowRequestPermissionRationale(_activity!!,Manifest.permission.CAMERA) || ActivityCompat.shouldShowRequestPermissionRationale(_activity!!,Manifest.permission.WRITE_EXTERNAL_STORAGE)
     }
 
-    fun cargarDialogoRecomendacion() {
+    private fun cargarDialogoRecomendacion() {
         val dialogo = AlertDialog.Builder(_context)
         dialogo.setTitle("Permisos Desactivados")
         dialogo.setMessage("Debe aceptar los permisos para el correcto funcionamiento de la App")

@@ -105,21 +105,11 @@ class NuevoContacto : AppCompatActivity(){
     }
 
     private fun iniciarGestorFotos(){
-        this.botonSelectFoto?.isEnabled = false
         this.gestorFotos = GestorFotos(this, this@NuevoContacto)
 
-        comprobarPermisosFotos()
-
         this.botonSelectFoto?.setOnClickListener {
-            this.gestorFotos.cargarImagen()
+            this.gestorFotos.mostrarOpcionesImportacion()
         }
-    }
-
-    private fun comprobarPermisosFotos(){
-        if (SolicitudPermisos(this).permisosDenegados())
-            SolicitudPermisos(this).cargarDialogoRecomendacion()
-        else
-            this.botonSelectFoto?.isEnabled = true
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

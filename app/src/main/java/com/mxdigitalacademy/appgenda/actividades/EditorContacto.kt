@@ -125,21 +125,11 @@ class EditorContacto : AppCompatActivity() {
     }
 
     private fun iniciarGestorFotos(){
-        this.botonSelectFoto?.isEnabled = false
         this.gestorFotos = GestorFotos(this, this@EditorContacto)
 
-        comprobarPermisosFotos()
-
         this.botonSelectFoto?.setOnClickListener {
-            this.gestorFotos.cargarImagen()
+            this.gestorFotos.mostrarOpcionesImportacion()
         }
-    }
-
-    private fun comprobarPermisosFotos(){
-        if (SolicitudPermisos(this).permisosDenegados())
-            SolicitudPermisos(this).cargarDialogoRecomendacion()
-        else
-            this.botonSelectFoto?.isEnabled = true
     }
 
     private fun accionBotonCancelar(){
