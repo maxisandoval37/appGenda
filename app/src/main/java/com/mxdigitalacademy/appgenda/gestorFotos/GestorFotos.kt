@@ -57,8 +57,7 @@ class GestorFotos (context: Context, activity: Activity){
         _path=Environment.getExternalStorageDirectory().absolutePath + File.separator+rutaImagen+File.separator+nombreImagen
 
         val imagen = File(_path!!)
-        var intent: Intent? = null
-        intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             val authorities = _context!!.packageName + ".provider"

@@ -8,9 +8,7 @@ import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
-import androidx.core.net.toUri
 import com.mxdigitalacademy.appgenda.R
-import com.mxdigitalacademy.appgenda.funciones.Funciones
 import com.mxdigitalacademy.appgenda.gestorFotos.GestorFotos
 
 class InfoContacto : AppCompatActivity() {
