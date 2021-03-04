@@ -16,7 +16,6 @@ import androidx.core.net.toUri
 import com.mxdigitalacademy.appgenda.gestorFotos.GestorFotos
 import com.mxdigitalacademy.appgenda.R
 import com.mxdigitalacademy.appgenda.modelo.ObjContacto
-import com.mxdigitalacademy.appgenda.permisos.SolicitudPermisos
 
 class NuevoContacto : AppCompatActivity(){
 

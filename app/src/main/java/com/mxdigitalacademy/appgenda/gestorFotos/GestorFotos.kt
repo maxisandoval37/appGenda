@@ -27,14 +27,16 @@ class GestorFotos (context: Context, activity: Activity){
     private var _activity: Activity? = null
 
     companion object{
-        fun setearImgView(iv: ImageView, path: String, imgDefecto: Int) {
+        fun setearImgView(iv: ImageView, path: String, imgDefecto: Int, tamIMG: Int) {
             if (path=="null")
                 iv.setImageResource(imgDefecto)
             else{
                 if (Funciones.esFormatoNumerico(path))
                     iv.setImageResource(path.toInt())
-                else
+                else{
                     iv.setImageURI(path.toUri())
+                    iv.layoutParams.height = tamIMG
+                }
             }
         }
     }

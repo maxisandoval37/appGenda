@@ -15,7 +15,6 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.net.toUri
 import com.mxdigitalacademy.appgenda.R
 import com.mxdigitalacademy.appgenda.gestorFotos.GestorFotos
-import com.mxdigitalacademy.appgenda.permisos.SolicitudPermisos
 
 class EditorContacto : AppCompatActivity() {
 
@@ -55,7 +54,7 @@ class EditorContacto : AppCompatActivity() {
         val tel2Editor = findViewById<EditText>(R.id.etTelSecundarioEditor)
         val emailEditor = findViewById<EditText>(R.id.etEmailEditor)
 
-        GestorFotos.setearImgView(this.imgMuestra!!, MainActivity.getContactoTelPrincipal(telClickeado)?.getImgAvatar().toString(),R.drawable.avatar_defecto)
+        GestorFotos.setearImgView(this.imgMuestra!!, MainActivity.getContactoTelPrincipal(telClickeado)?.getImgAvatar().toString(),R.drawable.avatar_defecto,320)
         nombreEditor.setText(MainActivity.getContactoTelPrincipal(telClickeado)?.getNombre())
         apellidoEditor.setText(MainActivity.getContactoTelPrincipal(telClickeado)?.getApellido())
         tel1Editor.setText(MainActivity.getContactoTelPrincipal(telClickeado)?.getTelefonoPrincipal())
