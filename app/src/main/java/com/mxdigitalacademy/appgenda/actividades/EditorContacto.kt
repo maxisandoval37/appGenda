@@ -15,11 +15,12 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.net.toUri
 import com.mxdigitalacademy.appgenda.R
 import com.mxdigitalacademy.appgenda.gestorFotos.GestorFotos
+import com.mxdigitalacademy.appgenda.modelo.ObjContactos
 
 class EditorContacto : AppCompatActivity() {
 
     private var toolbar: Toolbar? = null
-    private var telClickeado = MainActivity.nroTelefonoClick
+    private var telClickeado = ObjContactos.nroTelefonoClick
     private lateinit var gestorFotos: GestorFotos
     private var imgMuestra: ImageView? = null
     private var botonSelectFoto: Button? = null
@@ -54,12 +55,12 @@ class EditorContacto : AppCompatActivity() {
         val tel2Editor = findViewById<EditText>(R.id.etTelSecundarioEditor)
         val emailEditor = findViewById<EditText>(R.id.etEmailEditor)
 
-        GestorFotos.setearImgView(this.imgMuestra!!, MainActivity.getContactoTelPrincipal(telClickeado)?.getImgAvatar().toString(),R.drawable.avatar_defecto,320)
-        nombreEditor.setText(MainActivity.getContactoTelPrincipal(telClickeado)?.getNombre())
-        apellidoEditor.setText(MainActivity.getContactoTelPrincipal(telClickeado)?.getApellido())
-        tel1Editor.setText(MainActivity.getContactoTelPrincipal(telClickeado)?.getTelefonoPrincipal())
-        tel2Editor.setText(MainActivity.getContactoTelPrincipal(telClickeado)?.getTelefonoSecundario())
-        emailEditor.setText(MainActivity.getContactoTelPrincipal(telClickeado)?.getEmail())
+        GestorFotos.setearImgView(this.imgMuestra!!, ObjContactos.getContactoTelPrincipal(telClickeado)?.getImgAvatar().toString(),R.drawable.avatar_defecto,320)
+        nombreEditor.setText(ObjContactos.getContactoTelPrincipal(telClickeado)?.getNombre())
+        apellidoEditor.setText(ObjContactos.getContactoTelPrincipal(telClickeado)?.getApellido())
+        tel1Editor.setText(ObjContactos.getContactoTelPrincipal(telClickeado)?.getTelefonoPrincipal())
+        tel2Editor.setText(ObjContactos.getContactoTelPrincipal(telClickeado)?.getTelefonoSecundario())
+        emailEditor.setText(ObjContactos.getContactoTelPrincipal(telClickeado)?.getEmail())
     }
 
     private fun lanzarMensaje(mensaje: String){
@@ -67,17 +68,17 @@ class EditorContacto : AppCompatActivity() {
     }
 
     private fun actualizarObjetoContacto(fotoAvatar: String,nombre: String, apellido: String, tel1: String, tel2: String, email: String){
-        MainActivity.getContactoTelPrincipal(telClickeado)?.setImgAvatar(fotoAvatar)
-        MainActivity.getContactoTelPrincipal(telClickeado)?.setNombre(nombre)
-        MainActivity.getContactoTelPrincipal(telClickeado)?.setApellido(apellido)
-        MainActivity.getContactoTelPrincipal(telClickeado)?.setTelPrincipal(tel1)
-        MainActivity.getContactoTelPrincipal(telClickeado)?.setTelSecundario(tel2)
-        MainActivity.getContactoTelPrincipal(telClickeado)?.setEmail(email)
+        ObjContactos.getContactoTelPrincipal(telClickeado)?.setImgAvatar(fotoAvatar)
+        ObjContactos.getContactoTelPrincipal(telClickeado)?.setNombre(nombre)
+        ObjContactos.getContactoTelPrincipal(telClickeado)?.setApellido(apellido)
+        ObjContactos.getContactoTelPrincipal(telClickeado)?.setTelPrincipal(tel1)
+        ObjContactos.getContactoTelPrincipal(telClickeado)?.setTelSecundario(tel2)
+        ObjContactos.getContactoTelPrincipal(telClickeado)?.setEmail(email)
     }
 
     private fun actualizarTelClickeado(tel: String){
         telClickeado = tel
-        MainActivity.nroTelefonoClick = telClickeado
+        ObjContactos.nroTelefonoClick = telClickeado
     }
 
     private fun accionBotonGuardar(){
@@ -91,7 +92,7 @@ class EditorContacto : AppCompatActivity() {
             val email = findViewById<EditText>(R.id.etEmailEditor).text.toString()
 
             if (nombre.isNotEmpty() && apellido.isNotEmpty() && tel1.isNotEmpty() && email.isNotEmpty()){
-                if (MainActivity.existeTelefonoEnAgenda(tel1) && tel1 != telClickeado)
+                if (ObjContactos.existeTelefonoEnAgenda(tel1) && tel1 != telClickeado)
                         lanzarMensaje("El número $tel1, se encuentra registrado")
                 else{
                     if (tel2.isEmpty())
@@ -114,7 +115,7 @@ class EditorContacto : AppCompatActivity() {
 
     private fun detectarCambiosAvatar(): String{
         if (this.pathIMG == null)
-            return MainActivity.getContactoTelPrincipal(telClickeado)?.getImgAvatar().toString()
+            return ObjContactos.getContactoTelPrincipal(telClickeado)?.getImgAvatar().toString()
         return pathIMG.toString()
     }
 
@@ -167,7 +168,7 @@ class EditorContacto : AppCompatActivity() {
                 codFoto -> {
                     val bitmap = BitmapFactory.decodeFile(pathIMG.toString())
                     this.imgMuestra?.setImageBitmap(bitmap)
-                    MainActivity.getContactoTelPrincipal(telClickeado)?.setImgAvatar(pathIMG.toString())
+                    ObjContactos.getContactoTelPrincipal(telClickeado)?.setImgAvatar(pathIMG.toString())
                 }
             }
         }

@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 import com.mxdigitalacademy.appgenda.R
 import com.mxdigitalacademy.appgenda.gestorFotos.GestorFotos
+import com.mxdigitalacademy.appgenda.modelo.ObjContactos
 
 class InfoContacto : AppCompatActivity() {
     private var toolbar: Toolbar? = null
@@ -33,7 +34,7 @@ class InfoContacto : AppCompatActivity() {
             }
 
             R.id.borrarContacto -> {
-                MainActivity.eliminarContactoPorTelefono(MainActivity.nroTelefonoClick)
+                ObjContactos.eliminarContactoPorTelefono(ObjContactos.nroTelefonoClick)
                 finish()
                 return true
             }
@@ -60,7 +61,7 @@ class InfoContacto : AppCompatActivity() {
         val tel2 = findViewById<TextView>(R.id.tvTel2)
         val email = findViewById<TextView>(R.id.tvEmail)
 
-        val contactoAux = MainActivity.getContactoTelPrincipal(MainActivity.nroTelefonoClick)
+        val contactoAux = ObjContactos.getContactoTelPrincipal(ObjContactos.nroTelefonoClick)
 
         GestorFotos.setearImgView(fotoAvatar, contactoAux?.getImgAvatar().toString(),R.drawable.avatar_defecto,750)
 

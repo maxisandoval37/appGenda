@@ -16,6 +16,7 @@ import androidx.core.net.toUri
 import com.mxdigitalacademy.appgenda.gestorFotos.GestorFotos
 import com.mxdigitalacademy.appgenda.R
 import com.mxdigitalacademy.appgenda.modelo.ObjContacto
+import com.mxdigitalacademy.appgenda.modelo.ObjContactos
 
 class NuevoContacto : AppCompatActivity(){
 
@@ -52,8 +53,8 @@ class NuevoContacto : AppCompatActivity(){
     }
 
     private fun agregarContactoEnAgenda(contacto: ObjContacto){
-        if (!MainActivity.existeTelefonoEnAgenda(contacto.getTelefonoPrincipal())){
-            MainActivity.agregarContacto(contacto)
+        if (!ObjContactos.existeTelefonoEnAgenda(contacto.getTelefonoPrincipal())){
+            ObjContactos.agregarContacto(contacto)
             lanzarMensaje("Contacto guardado")
             finish()
         }

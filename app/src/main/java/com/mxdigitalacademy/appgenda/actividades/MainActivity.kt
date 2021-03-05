@@ -20,7 +20,7 @@ import com.mxdigitalacademy.appgenda.adaptador.ClickListener
 import com.mxdigitalacademy.appgenda.adaptador.CustomAdapter
 import com.mxdigitalacademy.appgenda.adaptador.LongClickListener
 import com.mxdigitalacademy.appgenda.funciones.Funciones
-import com.mxdigitalacademy.appgenda.modelo.ObjContacto
+import com.mxdigitalacademy.appgenda.modelo.ObjContactos
 import com.mxdigitalacademy.appgenda.permisos.SolicitudPermisos
 
 class MainActivity : AppCompatActivity() {
@@ -33,48 +33,6 @@ class MainActivity : AppCompatActivity() {
     private var actionMode: ActionMode? = null
     private var estadoActionMode = false
     private var callback: ActionMode.Callback? = null
-
-    companion object{
-        var listaObjContactos: ArrayList<ObjContacto> = ArrayList()
-        var adaptador: CustomAdapter? = null
-        var nroTelefonoClick: String = ""
-
-        fun agregarContacto(contacto: ObjContacto){
-            listaObjContactos.add(contacto)
-            adaptador?.addItem(contacto)
-            adaptador?.notifyDataSetChanged()
-        }
-
-        fun getContactoTelPrincipal(tel1: String): ObjContacto?{
-            for (contacto in listaObjContactos){
-                if (contacto.getTelefonoPrincipal() == tel1)
-                    return contacto
-            }
-            return null
-        }
-
-        fun eliminarContactoPorTelefono(tel1: String){
-            val itemBorrar: ObjContacto?
-
-            for (x:Int in 0 .. listaObjContactos.size){
-                if (listaObjContactos[x].getTelefonoPrincipal() == tel1){
-                    itemBorrar= listaObjContactos[x]
-                    listaObjContactos.remove(itemBorrar)
-                    adaptador?.removeItem(itemBorrar)
-                    adaptador?.notifyDataSetChanged()
-                    break
-                }
-            }
-        }
-
-        fun existeTelefonoEnAgenda(tel1: String): Boolean{
-            var existe = false
-            for (contacto in listaObjContactos){
-                existe = existe or (contacto.getTelefonoPrincipal() == tel1)
-            }
-            return existe
-        }
-    }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_main,menu)
@@ -114,10 +72,9 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onQueryTextChange(p0: String?): Boolean {
-                adaptador?.filter(listaObjContactos,p0!!)
+                ObjContactos.adaptador?.filter(ObjContactos.listaObjContactos,p0!!)
                 return true
             }
-
         })
     }
 
@@ -163,14 +120,14 @@ class MainActivity : AppCompatActivity() {
 
         accionesListaRecyclerView(tipoVista)
 
-        listaRecyclerView?.adapter = adaptador
+        listaRecyclerView?.adapter = ObjContactos.adaptador
     }
 
     private fun accionesListaRecyclerView(tipoVista: Int){
-        adaptador = CustomAdapter(listaObjContactos, tipoVista,object: ClickListener {
+        ObjContactos.adaptador = CustomAdapter(ObjContactos.listaObjContactos, tipoVista,object: ClickListener {
             override fun onClick(vista: View, index: Int) {
 
-                nroTelefonoClick = vista.findViewById<TextView>(R.id.tvNumTelefono).text.toString()
+                ObjContactos.nroTelefonoClick = vista.findViewById<TextView>(R.id.tvNumTelefono).text.toString()
                 val intent = Intent(this@MainActivity, InfoContacto::class.java)
                 startActivity(intent)
 
@@ -182,14 +139,13 @@ class MainActivity : AppCompatActivity() {
                 if (!estadoActionMode){
                     startSupportActionMode(callback!!)
                     estadoActionMode = true
-                    adaptador?.seleccionarItem(index)
+                    ObjContactos.adaptador?.seleccionarItem(index)
                 }
                 else
-                    adaptador?.seleccionarItem(index)
+                    ObjContactos.adaptador?.seleccionarItem(index)
 
-                actionMode?.title = Funciones.setCantTituloSeleccionados(adaptador?.getItemsSeleccionadosCount()!!)
+                actionMode?.title = Funciones.setCantTituloSeleccionados(ObjContactos.adaptador?.getItemsSeleccionadosCount()!!)
             }
-
         })
     }
 
@@ -203,7 +159,7 @@ class MainActivity : AppCompatActivity() {
             override fun onActionItemClicked(p0: ActionMode?, p1: MenuItem?): Boolean {
                 accionesItemsToolbarContextual(p1!!)
 
-                adaptador?.terminarActionMode()
+                ObjContactos.adaptador?.terminarActionMode()
                 actionMode?.finish()
                 estadoActionMode = false
                 return true
@@ -212,7 +168,7 @@ class MainActivity : AppCompatActivity() {
             override fun onCreateActionMode(p0: ActionMode?, p1: Menu?): Boolean {
                 supportActionBar?.hide()
                 actionMode = p0
-                adaptador?.iniciarActionMode()
+                ObjContactos.adaptador?.iniciarActionMode()
                 menuInflater.inflate(R.menu.menu_contextual,p1!!)
                 return true
             }
@@ -222,7 +178,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onDestroyActionMode(p0: ActionMode?) {
-                adaptador?.destruirActionMode()
+                ObjContactos.adaptador?.destruirActionMode()
                 estadoActionMode = false
                 supportActionBar?.show()
             }
@@ -231,7 +187,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun accionesItemsToolbarContextual(item: MenuItem){
         when (item.itemId){
-            R.id.ItemEliminar -> adaptador?.eliminarSeleccionados()
+            R.id.ItemEliminar -> ObjContactos.adaptador?.eliminarSeleccionados()
         }
     }
 
@@ -240,7 +196,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         SolicitudPermisos(this,this@MainActivity).validarPermisos()
-        Funciones.agregarContactosDePrueba(listaObjContactos)
+        Funciones.agregarContactosDePrueba(ObjContactos.listaObjContactos)
         iniciarToolbar()
         inicializarListaRecyclerView(R.layout.template_contacto)
         activarActionMode()
@@ -248,6 +204,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        adaptador?.notifyDataSetChanged()
+        ObjContactos.adaptador?.notifyDataSetChanged()
     }
 }
