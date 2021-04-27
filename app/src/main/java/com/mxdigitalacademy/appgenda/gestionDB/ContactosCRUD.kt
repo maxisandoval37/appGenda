@@ -93,16 +93,8 @@ class ContactosCRUD(context: Context) {
 
     fun updateContacto(contacto: ObjContacto){
         val db = _helper?.writableDatabase!!
-        val values = ContentValues()
 
-        values.put(ContactosSchema.Companion.Entrada.columnaTelPrincipal,contacto.getTelefonoPrincipal())
-        values.put(ContactosSchema.Companion.Entrada.columnaImgAvatar,contacto.getImgAvatar())
-        values.put(ContactosSchema.Companion.Entrada.columnaNombre,contacto.getNombre())
-        values.put(ContactosSchema.Companion.Entrada.columnaApellido,contacto.getApellido())
-        values.put(ContactosSchema.Companion.Entrada.columnaTelefonoS,contacto.getTelefonoSecundario())
-        values.put(ContactosSchema.Companion.Entrada.columnaEmail,contacto.getEmail())
-
-        db.update(this._nombreTabla,values,"telefonoP = ?", arrayOf(contacto.getTelefonoPrincipal()))
+        db.update(this._nombreTabla,mapeoColumnas(contacto),"telefonoP = ?", arrayOf(contacto.getTelefonoPrincipal()))
         db.close()
     }
 
