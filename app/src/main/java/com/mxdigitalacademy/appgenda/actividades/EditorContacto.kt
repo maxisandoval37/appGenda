@@ -67,15 +67,6 @@ class EditorContacto : AppCompatActivity() {
         Toast.makeText(this,mensaje,Toast.LENGTH_SHORT).show()
     }
 
-    private fun actualizarObjetoContacto(fotoAvatar: String,nombre: String, apellido: String, tel1: String, tel2: String, email: String){
-        ObjContactos.getContactoTelPrincipal(telClickeado)?.setImgAvatar(fotoAvatar)
-        ObjContactos.getContactoTelPrincipal(telClickeado)?.setNombre(nombre)
-        ObjContactos.getContactoTelPrincipal(telClickeado)?.setApellido(apellido)
-        ObjContactos.getContactoTelPrincipal(telClickeado)?.setTelPrincipal(tel1)
-        ObjContactos.getContactoTelPrincipal(telClickeado)?.setTelSecundario(tel2)
-        ObjContactos.getContactoTelPrincipal(telClickeado)?.setEmail(email)
-    }
-
     private fun actualizarTelClickeado(tel: String){
         telClickeado = tel
         ObjContactos.nroTelefonoClick = telClickeado
@@ -98,7 +89,7 @@ class EditorContacto : AppCompatActivity() {
                     if (tel2.isEmpty())
                         tel2 = "No posee"
                     try {
-                        actualizarObjetoContacto(detectarCambiosAvatar(),nombre,apellido,tel1,tel2,email)
+                        ObjContactos.actualizarObjetoContacto(this.telClickeado,detectarCambiosAvatar(),nombre,apellido,tel1,tel2,email)
                         actualizarTelClickeado(tel1)
                         lanzarMensaje("Contacto actualizado")
                         finish()
