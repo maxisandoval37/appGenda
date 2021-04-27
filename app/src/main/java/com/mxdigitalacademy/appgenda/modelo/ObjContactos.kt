@@ -1,15 +1,25 @@
 package com.mxdigitalacademy.appgenda.modelo
 
+import android.content.Context
 import com.mxdigitalacademy.appgenda.adaptador.CustomAdapter
+import com.mxdigitalacademy.appgenda.gestionDB.ContactosCRUD
 
 class ObjContactos {
 
     companion object{
+        var operacionesCRUD:ContactosCRUD? = null
         var listaObjContactos: ArrayList<ObjContacto> = ArrayList()
         var adaptador: CustomAdapter? = null
         var nroTelefonoClick: String = ""
 
+        fun inicializarListasContactos(context: Context){
+            operacionesCRUD = ContactosCRUD(context)
+            listaObjContactos.addAll(operacionesCRUD!!.getContactos())
+        }
+
         fun agregarContacto(contacto: ObjContacto){
+            operacionesCRUD?.newContacto(contacto)
+
             listaObjContactos.add(contacto)
             adaptador?.addItem(contacto)
             adaptador?.notifyDataSetChanged()

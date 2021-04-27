@@ -196,6 +196,7 @@ class MainActivity : AppCompatActivity() {
 
         SolicitudPermisos(this,this@MainActivity).validarPermisos()
         Funciones.agregarContactosDePrueba(ObjContactos.listaObjContactos)
+        ObjContactos.inicializarListasContactos(this)
         iniciarToolbar()
         inicializarListaRecyclerView(R.layout.template_contacto)
         activarActionMode()
