@@ -64,7 +64,6 @@ class InfoContacto : AppCompatActivity() {
         val contactoAux = ObjContactos.getContactoTelPrincipal(ObjContactos.nroTelefonoClick)
 
         GestorFotos.setearImgView(fotoAvatar, contactoAux?.getImgAvatar().toString(),R.drawable.avatar_defecto,750)
-
         nombreCompleto.text = contactoAux?.getNombreCompleto()
         tel1.text = contactoAux?.getTelefonoPrincipal()
         tel2.text = contactoAux?.getTelefonoSecundario()

@@ -1,6 +1,6 @@
 package com.mxdigitalacademy.appgenda.modelo
 
-class ObjContacto(imgAvatar: String, nombre: String, apellido: String, telefonoP: String, telefonoS: String?, email: String) {
+class ObjContacto(telefonoP: String, imgAvatar: String, nombre: String, apellido: String, telefonoS: String?, email: String) {
 
     private var _imgAvatar: String = "0"
     private var _nombre: String = ""
@@ -10,10 +10,10 @@ class ObjContacto(imgAvatar: String, nombre: String, apellido: String, telefonoP
     private var _email: String = ""
 
     init {
+        this._telefonoPrincipal = telefonoP
         this._imgAvatar = imgAvatar
         this._nombre = nombre
         this._apellido = apellido
-        this._telefonoPrincipal = telefonoP
         this._telefonoSecundario = telefonoS
         this._email = email
     }
@@ -31,6 +31,10 @@ class ObjContacto(imgAvatar: String, nombre: String, apellido: String, telefonoP
         }
     }
 
+    fun getTelefonoPrincipal(): String {
+        return  this._telefonoPrincipal
+    }
+
     fun getNombre(): String {
         return this._nombre
     }
@@ -40,10 +44,6 @@ class ObjContacto(imgAvatar: String, nombre: String, apellido: String, telefonoP
 
     fun getNombreCompleto(): String {
         return this._nombre + " " + this._apellido
-    }
-
-    fun getTelefonoPrincipal(): String {
-        return  this._telefonoPrincipal
     }
 
     fun getTelefonoSecundario(): String? {
@@ -56,6 +56,13 @@ class ObjContacto(imgAvatar: String, nombre: String, apellido: String, telefonoP
 
     fun getEmail(): String {
         return this._email
+    }
+
+    fun setTelPrincipal(telPrin: String){
+        if (telPrin.length <= 10)
+            this._telefonoPrincipal = telPrin
+        else
+            throw IllegalArgumentException("El 1° Teléfono no puede tener más de 10 digitos")
     }
 
     fun setImgAvatar(patch: String){
@@ -74,13 +81,6 @@ class ObjContacto(imgAvatar: String, nombre: String, apellido: String, telefonoP
             this._apellido = apellido
         else
             throw IllegalArgumentException("El Apellido no puede tener más de 10 caracteres")
-    }
-
-    fun setTelPrincipal(telPrin: String){
-        if (telPrin.length <= 10)
-            this._telefonoPrincipal = telPrin
-        else
-            throw IllegalArgumentException("El 1° Teléfono no puede tener más de 10 digitos")
     }
 
     fun setTelSecundario(telSecun: String?){

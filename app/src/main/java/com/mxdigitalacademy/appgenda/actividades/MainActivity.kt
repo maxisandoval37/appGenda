@@ -88,7 +88,6 @@ class MainActivity : AppCompatActivity() {
         switchView?.setOnCheckedChangeListener { _, b ->
             switchCambiarTipoDeVista(b)
         }
-
     }
 
     private fun switchCambiarTipoDeVista(estado: Boolean){

@@ -78,7 +78,7 @@ class NuevoContacto : AppCompatActivity(){
 
                 try {
                     ObjContacto.datosValidos(nombre,apellido,tel1,tel2,email)
-                    val contacto = ObjContacto(pathIMG.toString(), nombre, apellido, tel1, tel2, email)
+                    val contacto = ObjContacto(tel1, pathIMG.toString(), nombre, apellido, tel2, email)
                     agregarContactoEnAgenda(contacto)
                 }
                 catch(e: IllegalArgumentException){
