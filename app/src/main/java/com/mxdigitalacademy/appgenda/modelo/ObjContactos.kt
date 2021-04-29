@@ -25,11 +25,7 @@ class ObjContactos {
         }
 
         fun getContactoTelPrincipal(tel1: String): ObjContacto?{
-            for (contacto in listaObjContactos){
-                if (contacto.getTelefonoPrincipal() == tel1)
-                    return contacto
-            }
-            return null
+            return contactosCRUD?.getContactoByTelPrincipal(tel1)
         }
 
         fun actualizarObjetoContacto(telClickeado: String,fotoAvatar: String,nombre: String, apellido: String, tel1: String, tel2: String, email: String){
