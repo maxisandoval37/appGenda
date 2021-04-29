@@ -63,8 +63,8 @@ class ContactosCRUD(context: Context) {
         return alumnos
     }
 
-    fun getContactosID(id: String): ObjContacto?{
-        var alumno: ObjContacto? = null
+    fun getContactoByTelPrincipal(telP: String): ObjContacto?{
+        var contacto: ObjContacto? = null
         val db = _helper?.readableDatabase!!
         val columnaTelPrincipal = ContactosSchema.Companion.Entrada.columnaTelPrincipal
         val columnaImgAvatar = ContactosSchema.Companion.Entrada.columnaImgAvatar
@@ -73,12 +73,12 @@ class ContactosCRUD(context: Context) {
         val columnaTelefonoS = ContactosSchema.Companion.Entrada.columnaTelefonoS
         val columnaEmail = ContactosSchema.Companion.Entrada.columnaEmail
 
-        val columnas = arrayOf(columnaTelPrincipal,columnaNombre)
+        val columnas = arrayOf(columnaTelPrincipal,columnaImgAvatar,columnaNombre,columnaApellido,columnaTelefonoS,columnaEmail)
 
-        val c = db.query(this._nombreTabla, columnas, "telefonoP = ?", arrayOf(id), null, null, null)
+        val c = db.query(this._nombreTabla, columnas, "telefonoP = ?", arrayOf(telP), null, null, null)
 
         while (c.moveToNext()){
-            alumno = ObjContacto(
+            contacto = ObjContacto(
                 c.getString(c.getColumnIndexOrThrow(columnaTelPrincipal)),
                 c.getString(c.getColumnIndexOrThrow(columnaImgAvatar)),
                 c.getString(c.getColumnIndexOrThrow(columnaNombre)),
@@ -86,9 +86,9 @@ class ContactosCRUD(context: Context) {
                 c.getString(c.getColumnIndexOrThrow(columnaTelefonoS)),
                 c.getString(c.getColumnIndexOrThrow(columnaEmail)))
         }
-
+        println(contacto?.getTelefonoPrincipal())
         db.close()
-        return alumno
+        return contacto
     }
 
     fun updateContacto(contacto: ObjContacto){

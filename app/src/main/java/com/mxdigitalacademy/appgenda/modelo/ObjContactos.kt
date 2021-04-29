@@ -57,11 +57,7 @@ class ObjContactos {
         }
 
         fun existeTelefonoEnAgenda(tel1: String): Boolean{
-            var existe = false
-            for (contacto in listaObjContactos){
-                existe = existe or (contacto.getTelefonoPrincipal() == tel1)
-            }
-            return existe
+            return (contactosCRUD?.getContactoByTelPrincipal(tel1)?.getTelefonoPrincipal().equals(tel1))
         }
     }
 
