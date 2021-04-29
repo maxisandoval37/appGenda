@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.mxdigitalacademy.appgenda.R
 import com.mxdigitalacademy.appgenda.funciones.Funciones
 import com.mxdigitalacademy.appgenda.modelo.ObjContacto
+import com.mxdigitalacademy.appgenda.modelo.ObjContactos
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -115,6 +116,7 @@ class CustomAdapter(items:ArrayList<ObjContacto>, var tipoVista: Int, var clickL
 
             for(index in this._itemsSeleccionados!!){
                 itemsEliminados.add(this._items?.get(index)!!)
+                ObjContactos.eliminarContactoPorTelefono(this._items?.get(index)?.getTelefonoPrincipal()!!)
             }
 
             this._items?.removeAll(itemsEliminados)
