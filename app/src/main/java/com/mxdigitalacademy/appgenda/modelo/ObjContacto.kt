@@ -2,10 +2,10 @@ package com.mxdigitalacademy.appgenda.modelo
 
 class ObjContacto(telefonoP: String, imgAvatar: String, nombre: String, apellido: String, telefonoS: String?, email: String) {
 
+    private var _telefonoPrincipal: String = ""
     private var _imgAvatar: String = "0"
     private var _nombre: String = ""
     private var _apellido: String = ""
-    private var _telefonoPrincipal: String = ""
     private var _telefonoSecundario: String? = ""
     private var _email: String = ""
 
