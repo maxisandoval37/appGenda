@@ -19,6 +19,7 @@ import com.mxdigitalacademy.appgenda.R
 import com.mxdigitalacademy.appgenda.adaptador.ClickListener
 import com.mxdigitalacademy.appgenda.adaptador.CustomAdapter
 import com.mxdigitalacademy.appgenda.adaptador.LongClickListener
+import com.mxdigitalacademy.appgenda.funciones.ContactosDePrueba
 import com.mxdigitalacademy.appgenda.funciones.Funciones
 import com.mxdigitalacademy.appgenda.modelo.ObjContactos
 import com.mxdigitalacademy.appgenda.permisos.SolicitudPermisos
@@ -195,7 +196,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         SolicitudPermisos(this,this@MainActivity).validarPermisos()
-        Funciones.agregarContactosDePrueba(this)
+        ContactosDePrueba.cargarContactosDBVacia(this)
         ObjContactos.inicializarListasContactos(this)
         iniciarToolbar()
         inicializarListaRecyclerView(R.layout.template_contacto)
