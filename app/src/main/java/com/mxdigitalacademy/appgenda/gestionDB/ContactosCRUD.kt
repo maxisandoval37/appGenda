@@ -86,7 +86,7 @@ class ContactosCRUD(context: Context) {
                 c.getString(c.getColumnIndexOrThrow(columnaTelefonoS)),
                 c.getString(c.getColumnIndexOrThrow(columnaEmail)))
         }
-        println(contacto?.getTelefonoPrincipal())
+
         db.close()
         return contacto
     }

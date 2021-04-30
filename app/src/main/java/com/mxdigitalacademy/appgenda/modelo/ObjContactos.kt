@@ -2,6 +2,7 @@ package com.mxdigitalacademy.appgenda.modelo
 
 import android.content.Context
 import com.mxdigitalacademy.appgenda.adaptador.CustomAdapter
+import com.mxdigitalacademy.appgenda.funciones.ContactosDePrueba
 import com.mxdigitalacademy.appgenda.gestionDB.ContactosCRUD
 
 class ObjContactos {
@@ -25,14 +26,17 @@ class ObjContactos {
         }
 
         fun getContactoTelPrincipal(tel1: String): ObjContacto?{
-            return contactosCRUD?.getContactoByTelPrincipal(tel1)
+            for (contacto in listaObjContactos){
+                if (contacto.getTelefonoPrincipal() == tel1)
+                    return contacto
+            }
+            return null
         }
 
-        fun actualizarObjetoContacto(telClickeado: String,fotoAvatar: String,nombre: String, apellido: String, tel1: String, tel2: String, email: String){
+        fun actualizarObjetoContacto(telClickeado: String,fotoAvatar: String,nombre: String, apellido: String, tel2: String, email: String){
             getContactoTelPrincipal(telClickeado)?.setImgAvatar(fotoAvatar)
             getContactoTelPrincipal(telClickeado)?.setNombre(nombre)
             getContactoTelPrincipal(telClickeado)?.setApellido(apellido)
-            getContactoTelPrincipal(telClickeado)?.setTelPrincipal(tel1)
             getContactoTelPrincipal(telClickeado)?.setTelSecundario(tel2)
             getContactoTelPrincipal(telClickeado)?.setEmail(email)
 

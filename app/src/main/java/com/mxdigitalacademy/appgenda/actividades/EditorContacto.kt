@@ -67,39 +67,26 @@ class EditorContacto : AppCompatActivity() {
         Toast.makeText(this,mensaje,Toast.LENGTH_SHORT).show()
     }
 
-    private fun actualizarTelClickeado(tel: String){
-        telClickeado = tel
-        ObjContactos.nroTelefonoClick = telClickeado
-    }
-
-    private fun accionBotonGuardar(){
+    private fun accionBotonGuardar() {
         val botonGuardar = findViewById<Button>(R.id.btnGuardarEditor)
 
         botonGuardar.setOnClickListener {
             val nombre = findViewById<EditText>(R.id.etNombreEditor).text.toString()
             val apellido = findViewById<EditText>(R.id.etApellidoEditor).text.toString()
-            val tel1 = findViewById<EditText>(R.id.etTelPrincipalEditor).text.toString()
             var tel2 = findViewById<EditText>(R.id.etTelSecundarioEditor).text.toString()
             val email = findViewById<EditText>(R.id.etEmailEditor).text.toString()
 
-            if (nombre.isNotEmpty() && apellido.isNotEmpty() && tel1.isNotEmpty() && email.isNotEmpty()){
-                if (ObjContactos.existeTelefonoEnAgenda(tel1) && tel1 != telClickeado)
-                        lanzarMensaje("El número $tel1, se encuentra registrado")
-                else{
-                    if (tel2.isEmpty())
-                        tel2 = "No posee"
-                    try {
-                        ObjContactos.actualizarObjetoContacto(this.telClickeado,detectarCambiosAvatar(),nombre,apellido,tel1,tel2,email)
-                        actualizarTelClickeado(tel1)
-                        lanzarMensaje("Contacto actualizado")
-                        finish()
-                    }
-                    catch(e: IllegalArgumentException){
-                        lanzarMensaje(e.message.toString())
-                    }
+            if (nombre.isNotEmpty() && apellido.isNotEmpty() && email.isNotEmpty()) {
+                if (tel2.isEmpty())
+                    tel2 = "No posee"
+                try {
+                    ObjContactos.actualizarObjetoContacto(this.telClickeado, detectarCambiosAvatar(), nombre, apellido, tel2, email)
+                    lanzarMensaje("Contacto actualizado")
+                    finish()
+                } catch (e: IllegalArgumentException) {
+                    lanzarMensaje(e.message.toString())
                 }
-            }
-            else
+            } else
                 lanzarMensaje("Complete los campos restantes para continuar")
         }
     }
@@ -136,6 +123,7 @@ class EditorContacto : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_editor)
 
+        findViewById<EditText>(R.id.etTelPrincipalEditor).isEnabled = false
         iniciarToolbar()
         inicializarElemsGraficos()
         iniciarGestorFotos()
