@@ -3,6 +3,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/mostrarCita"
+        android:icon="@drawable/ic_baseline_format_quote_24"
+        android:title="@string/editar"
+        app:showAsAction="ifRoom" />
+
+    <item
         android:id="@+id/editarContacto"
         android:icon="@drawable/ic_baseline_edit_24_white"
         android:title="@string/editar"

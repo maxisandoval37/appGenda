@@ -30,7 +30,7 @@ class SolicitudHTTP(context: Context) {
         val solicitud = StringRequest(Request.Method.GET, url, Response.Listener {
             var soli = it.replace("[","")
             soli =  soli.replace("]","")
-            cargarDatos(soli)
+            cargarCita(soli)
         },
                 Response.ErrorListener { error ->
                     when (error.toString()) {
@@ -40,10 +40,18 @@ class SolicitudHTTP(context: Context) {
         colaDeSolicitudes.add(solicitud)
     }
 
-    private fun cargarDatos(json: String){
+    private fun cargarCita(json: String){
         val gson = Gson()
-
-        val objeto = gson.fromJson(json, com.mxdigitalacademy.appgenda.solicitudHTTP.Response::class.java)
+        val objetoResponse = gson.fromJson(json, HTTPResponse::class.java)
+        try {
+            mostrarMensaje(objetoResponse.quote)
+        }
+        catch (e: Exception){
+            mostrarMensaje("¡Gracias por usar la AppGenda! ❤")
+        }
+    }
+    private fun mostrarMensaje(mensaje: String){
+        Toast.makeText(_context, mensaje, Toast.LENGTH_SHORT).show()
     }
 
 }

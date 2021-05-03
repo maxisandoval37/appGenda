@@ -7,6 +7,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import com.mxdigitalacademy.appgenda.R
 import com.mxdigitalacademy.appgenda.gestorFotos.GestorFotos
@@ -16,6 +17,7 @@ import com.mxdigitalacademy.appgenda.solicitudHTTP.SolicitudHTTP
 class InfoContacto : AppCompatActivity() {
     private var toolbar: Toolbar? = null
     private var solicitudHTTP: SolicitudHTTP? = null
+    private var autorActual=""
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_info_contacto,menu)
@@ -26,6 +28,15 @@ class InfoContacto : AppCompatActivity() {
         when(item.itemId){
             android.R.id.home ->  {
                 finish()
+                return true
+            }
+
+            R.id.mostrarCita -> {
+                if (solicitudHTTP?.verficarConexionInternet(this@InfoContacto)!!){
+                    val autor = autorActual.replace(" ","+")
+                    solicitudHTTP?.solicitudHTTPVolley("https://www.breakingbadapi.com/api/quote/random?author=$autor")
+                } else
+                    Toast.makeText(this, "No hay conexión a internet 😢", Toast.LENGTH_SHORT).show()
                 return true
             }
 
@@ -59,6 +70,7 @@ class InfoContacto : AppCompatActivity() {
     private fun setearInfoElemsVisuales(){
         val fotoAvatar = findViewById<ImageView>(R.id.ivAvatar)
         val nombreCompleto = findViewById<TextView>(R.id.tvNombreCompleto)
+        autorActual = nombreCompleto.text.toString()
         val tel1 = findViewById<TextView>(R.id.tvTel1)
         val tel2 = findViewById<TextView>(R.id.tvTel2)
         val email = findViewById<TextView>(R.id.tvEmail)
