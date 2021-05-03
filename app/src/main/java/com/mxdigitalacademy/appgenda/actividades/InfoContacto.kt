@@ -11,9 +11,11 @@ import androidx.appcompat.widget.Toolbar
 import com.mxdigitalacademy.appgenda.R
 import com.mxdigitalacademy.appgenda.gestorFotos.GestorFotos
 import com.mxdigitalacademy.appgenda.modelo.ObjContactos
+import com.mxdigitalacademy.appgenda.solicitudHTTP.SolicitudHTTP
 
 class InfoContacto : AppCompatActivity() {
     private var toolbar: Toolbar? = null
+    private var solicitudHTTP: SolicitudHTTP? = null
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_info_contacto,menu)
@@ -76,6 +78,7 @@ class InfoContacto : AppCompatActivity() {
 
         iniciarToolbar()
         setearInfoElemsVisuales()
+        solicitudHTTP = SolicitudHTTP(this)
     }
 
     override fun onResume() {
