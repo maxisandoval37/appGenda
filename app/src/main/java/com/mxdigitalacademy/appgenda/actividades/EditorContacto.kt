@@ -121,7 +121,7 @@ class EditorContacto : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_editor)
+        setContentView(R.layout.activity_editor_contacto)
 
         findViewById<EditText>(R.id.etTelPrincipalEditor).isEnabled = false
         iniciarToolbar()
