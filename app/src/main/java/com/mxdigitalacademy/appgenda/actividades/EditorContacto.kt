@@ -13,6 +13,7 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.core.net.toUri
+import com.google.android.material.textfield.TextInputLayout
 import com.mxdigitalacademy.appgenda.R
 import com.mxdigitalacademy.appgenda.gestorFotos.GestorFotos
 import com.mxdigitalacademy.appgenda.modelo.ObjContactos
@@ -49,18 +50,18 @@ class EditorContacto : AppCompatActivity() {
     }
 
     private fun setearInfoInputsTexts(){
-        val nombreEditor = findViewById<EditText>(R.id.etNombreEditor)
-        val apellidoEditor = findViewById<EditText>(R.id.etApellidoEditor)
-        val tel1Editor = findViewById<EditText>(R.id.etTelPrincipalEditor)
-        val tel2Editor = findViewById<EditText>(R.id.etTelSecundarioEditor)
-        val emailEditor = findViewById<EditText>(R.id.etEmailEditor)
+        val nombreEditor = findViewById<TextInputLayout>(R.id.etNombreEditor).editText
+        val apellidoEditor = findViewById<TextInputLayout>(R.id.etApellidoEditor).editText
+        val tel1Editor = findViewById<TextInputLayout>(R.id.etTelPrincipalEditor).editText
+        val tel2Editor = findViewById<TextInputLayout>(R.id.etTelSecundarioEditor).editText
+        val emailEditor = findViewById<TextInputLayout>(R.id.etEmailEditor).editText
 
         GestorFotos.setearImgView(this.imgMuestra!!, ObjContactos.getContactoTelPrincipal(telClickeado)?.getImgAvatar().toString(),R.drawable.avatar_defecto,320)
-        nombreEditor.setText(ObjContactos.getContactoTelPrincipal(telClickeado)?.getNombre())
-        apellidoEditor.setText(ObjContactos.getContactoTelPrincipal(telClickeado)?.getApellido())
-        tel1Editor.setText(ObjContactos.getContactoTelPrincipal(telClickeado)?.getTelefonoPrincipal())
-        tel2Editor.setText(ObjContactos.getContactoTelPrincipal(telClickeado)?.getTelefonoSecundario())
-        emailEditor.setText(ObjContactos.getContactoTelPrincipal(telClickeado)?.getEmail())
+        nombreEditor?.setText(ObjContactos.getContactoTelPrincipal(telClickeado)?.getNombre())
+        apellidoEditor?.setText(ObjContactos.getContactoTelPrincipal(telClickeado)?.getApellido())
+        tel1Editor?.setText(ObjContactos.getContactoTelPrincipal(telClickeado)?.getTelefonoPrincipal())
+        tel2Editor?.setText(ObjContactos.getContactoTelPrincipal(telClickeado)?.getTelefonoSecundario())
+        emailEditor?.setText(ObjContactos.getContactoTelPrincipal(telClickeado)?.getEmail())
     }
 
     private fun lanzarMensaje(mensaje: String){
@@ -71,10 +72,10 @@ class EditorContacto : AppCompatActivity() {
         val botonGuardar = findViewById<Button>(R.id.btnGuardarEditor)
 
         botonGuardar.setOnClickListener {
-            val nombre = findViewById<EditText>(R.id.etNombreEditor).text.toString()
-            val apellido = findViewById<EditText>(R.id.etApellidoEditor).text.toString()
-            var tel2 = findViewById<EditText>(R.id.etTelSecundarioEditor).text.toString()
-            val email = findViewById<EditText>(R.id.etEmailEditor).text.toString()
+            val nombre = findViewById<TextInputLayout>(R.id.etNombreEditor).editText?.text.toString()
+            val apellido = findViewById<TextInputLayout>(R.id.etApellidoEditor).editText?.text.toString()
+            var tel2 = findViewById<TextInputLayout>(R.id.etTelSecundarioEditor).editText?.text.toString()
+            val email = findViewById<TextInputLayout>(R.id.etEmailEditor).editText?.text.toString()
 
             if (nombre.isNotEmpty() && apellido.isNotEmpty() && email.isNotEmpty()) {
                 if (tel2.isEmpty())
@@ -121,9 +122,9 @@ class EditorContacto : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_editor)
+        setContentView(R.layout.activity_editor_contacto)
 
-        findViewById<EditText>(R.id.etTelPrincipalEditor).isEnabled = false
+        findViewById<TextInputLayout>(R.id.etTelPrincipalEditor).editText?.isEnabled = false
         iniciarToolbar()
         inicializarElemsGraficos()
         iniciarGestorFotos()

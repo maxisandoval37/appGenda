@@ -23,7 +23,7 @@
     <ImageView
         android:id="@+id/ivFotoMuestraEditor"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="125dp"
         android:layout_marginTop="56dp"
         android:contentDescription="@string/todo"
         app:layout_constraintEnd_toEndOf="parent"
@@ -34,99 +34,157 @@
 
     <Button
         android:id="@+id/btnSeleccionarImgEditor"
-        android:layout_width="40dp"
-        android:layout_height="33dp"
-        android:layout_marginTop="160dp"
-        android:layout_marginEnd="4dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="144dp"
+        android:layout_marginEnd="8dp"
         android:background="@android:drawable/ic_menu_edit"
         android:clickable="true"
         android:focusable="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/etNombreEditor"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="220dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="185dp"
+        android:layout_marginEnd="48dp"
         android:autofillHints="@string/nombre"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:labelFor="@+id/etNombreEditor"
-        android:text="@string/nombre"
+        android:hint="@string/nombre"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.50"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/toolbar" />
+        app:layout_constraintTop_toTopOf="@+id/toolbar"
 
-    <EditText
+        app:counterEnabled="true"
+        app:counterMaxLength="15"
+        app:startIconDrawable="@drawable/ic_baseline_person_24"
+        app:errorEnabled="true">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/etApellidoEditor"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginEnd="48dp"
         android:autofillHints="@string/apellido"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:labelFor="@+id/etApellidoEditor"
-        android:text="@string/apellido"
+        android:hint="@string/apellido"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.50"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etNombreEditor" />
+        app:layout_constraintTop_toBottomOf="@+id/etNombreEditor"
 
-    <EditText
+        app:counterEnabled="true"
+        app:counterMaxLength="15"
+        app:startIconDrawable="@drawable/ic_baseline_person_24"
+        app:errorEnabled="true">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/etTelPrincipalEditor"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginEnd="48dp"
         android:autofillHints="@string/tel_fono_principal"
         android:ems="10"
-        android:inputType="phone"
-        android:labelFor="@+id/etTelPrincipalEditor"
-        android:text="@string/tel_fono_principal"
+        android:hint="@string/tel_fono_principal"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.50"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etApellidoEditor" />
+        app:layout_constraintTop_toBottomOf="@+id/etApellidoEditor"
 
-    <EditText
+        app:counterEnabled="true"
+        app:counterMaxLength="15"
+        app:startIconDrawable="@drawable/ic_baseline_phone_24"
+        app:errorEnabled="true">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="phone"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/etTelSecundarioEditor"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginEnd="48dp"
         android:autofillHints="@string/tel_fono_secundario"
         android:ems="10"
-        android:inputType="phone"
-        android:labelFor="@+id/etTelSecundarioEditor"
-        android:text="@string/tel_fono_secundario"
+        android:hint="@string/tel_fono_secundario"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.50"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etTelPrincipalEditor" />
+        app:layout_constraintTop_toBottomOf="@+id/etTelPrincipalEditor"
 
-    <EditText
+        app:counterEnabled="true"
+        app:counterMaxLength="15"
+        app:startIconDrawable="@drawable/ic_baseline_phone_24"
+        app:errorEnabled="true">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="phone"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/etEmailEditor"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginEnd="48dp"
         android:autofillHints="@string/e_mail"
         android:ems="10"
-        android:inputType="textEmailAddress"
-        android:labelFor="@+id/etEmailEditor"
-        android:text="@string/e_mail"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:hint="@string/e_mail"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.50"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etTelSecundarioEditor"
-        app:layout_constraintVertical_bias="0.05" />
+
+        app:counterEnabled="true"
+        app:counterMaxLength="30"
+        app:startIconDrawable="@drawable/ic_baseline_email_24"
+        app:errorEnabled="true">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/btnCancelarEditor"
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
         android:text="@string/bt_cancelar"
         android:textColor="@color/black"
         app:layout_constraintEnd_toStartOf="@+id/btnGuardarEditor"
@@ -138,7 +196,6 @@
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
         android:layout_marginEnd="64dp"
         android:text="@string/bt_guardar"
         android:textColor="@color/black"
