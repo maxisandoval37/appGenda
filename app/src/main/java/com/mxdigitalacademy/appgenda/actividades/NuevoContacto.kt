@@ -8,11 +8,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Button
-import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.core.net.toUri
+import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import com.mxdigitalacademy.appgenda.gestorFotos.GestorFotos
 import com.mxdigitalacademy.appgenda.R
 import com.mxdigitalacademy.appgenda.modelo.ObjContacto
@@ -66,11 +67,11 @@ class NuevoContacto : AppCompatActivity(){
         val boton = findViewById<Button>(R.id.btnGuardar)
 
         boton.setOnClickListener {
-            val nombre = findViewById<EditText>(R.id.etNombre).text.toString()
-            val apellido = findViewById<EditText>(R.id.etApellido).text.toString()
-            val tel1 = findViewById<EditText>(R.id.etTelPrincipal).text.toString()
-            var tel2 = findViewById<EditText>(R.id.etTelSecundario).text.toString()
-            val email = findViewById<EditText>(R.id.etEmail).text.toString()
+            val nombre = findViewById<TextInputLayout>(R.id.etNombre).editText?.text.toString()
+            val apellido = findViewById<TextInputLayout>(R.id.etApellido).editText?.text.toString()
+            val tel1 = findViewById<TextInputLayout>(R.id.etTelPrincipal).editText?.text.toString()
+            var tel2 = findViewById<TextInputLayout>(R.id.etTelSecundario).editText?.text.toString()
+            val email = findViewById<TextInputLayout>(R.id.etEmail).editText?.text.toString()
 
             if (nombre.isNotEmpty() && apellido.isNotEmpty() && tel1.isNotEmpty() && email.isNotEmpty()){
                 if (tel2.isEmpty())
