@@ -1,13 +1,14 @@
 package com.mxdigitalacademy.appgenda.actividades
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.mxdigitalacademy.appgenda.R
 import com.mxdigitalacademy.appgenda.gestorFotos.GestorFotos
@@ -47,12 +48,24 @@ class InfoContacto : AppCompatActivity() {
             }
 
             R.id.borrarContacto -> {
-                ObjContactos.eliminarContactoPorTelefono(ObjContactos.nroTelefonoClick)
-                finish()
-                return true
+                dialogoEliminarContacto()
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun dialogoEliminarContacto() {
+        AlertDialog.Builder(this)
+            .setTitle("Eliminar contacto")
+            .setMessage("¿Quieres eliminar este contacto?")
+            .setPositiveButton("Si") { _, _ ->
+                ObjContactos.eliminarContactoPorTelefono(ObjContactos.nroTelefonoClick)
+                finish()
+                overridePendingTransition(0, 0)
+            }
+            .setNegativeButton("No", null)
+            .setIcon(android.R.drawable.ic_dialog_alert)
+            .show()
     }
 
     private fun iniciarToolbar(){
